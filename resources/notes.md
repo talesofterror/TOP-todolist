@@ -12,6 +12,14 @@
     - incomplete
     - complete
     - sleep
+- functions
+    - set {all properties and state}
+    - delete
 ### project
-- title
-- taskObjects
+- properties
+    - title
+    - taskObjects
+- function 
+    - edit name
+    - delete
+
