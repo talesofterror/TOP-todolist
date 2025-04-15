@@ -8,13 +8,15 @@
     - dueDate
     - priority
     - notes
-- states
-    - incomplete
-    - complete
-    - sleep
+    - state
+        - incomplete
+        - complete
+        - sleep
+    - elements
 - functions
     - set {all properties and state}
     - delete
+
 ### project
 - properties
     - title
@@ -22,4 +24,10 @@
 - function 
     - edit name
     - delete
+    - add task
+    - remove task
+    - move task
+    - sort
+        - dueDate
+        - priority
 
