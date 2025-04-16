@@ -3,24 +3,28 @@ class Task {
 		this.title = title
 	}
 
-	dueDate
+	dueDate = new Date()
 	description = ""
 	priority
 	notes = ""
 	state
 
-	elements
-
-	static delete () {
-		delete this
-	}	
+	elements = {}
 	
+	get dueDate () {
+		return `${this.dueDate.toLocaleDateString("default", {month: 'long'})} ${this.dueDate.getDate()}, ${this.dueDate.getFullYear()}`
+	}
+
 }
 
 class Project {
 	constructor (title, tasks) {
 		this.title = title
-		this.tasks = {...tasks}
+		this.tasks = tasks == undefined ? {} : {...tasks}
+	}
+
+	addTasks (...tasks) {
+		Object.assign(this.tasks, {...tasks})
 	}
 }
 

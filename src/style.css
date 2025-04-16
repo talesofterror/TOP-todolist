@@ -1,0 +1,19 @@
+:root {
+	--title-color: #fff;
+	--bg-color: #123;
+
+	--task-bg-color: #fff;
+	--task-text-color: #000;
+
+	--priority-color-1: #f45;
+	--priority-color-2: #dd4;
+	--priority-color-3: #24f;
+
+	--state-color-inactive: #122;
+	--state-color-sleep: #335;
+}
+
+body {
+	background-color: var(--bg-color);
+	color: title-color;
+}
