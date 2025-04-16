@@ -3,7 +3,10 @@
 	--bg-color: #123;
 
 	--task-bg-color: #fff;
+	--task-border-color: #1bf;
 	--task-text-color: #000;
+	--task-border-size: 2px;
+	--task-border-radius: 1em;
 
 	--priority-color-1: #f45;
 	--priority-color-2: #dd4;
@@ -13,7 +16,64 @@
 	--state-color-sleep: #335;
 }
 
-body {
-	background-color: var(--bg-color);
-	color: title-color;
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
 }
+
+body {
+	font-size: calc(0.75em + 0.75vh);
+	background-color: var(--bg-color);
+	color: var(--title-color);
+	margin: 1em;
+}
+
+.base-container {
+	/* outline: red 1px solid; */
+}
+
+.main-title-container {
+	/* outline: 1px solid red; */
+	text-align: center;
+}
+
+.projects-container {
+	/* outline: 1px solid #38d; */
+	
+	padding: 0.5em;
+	margin: 1em 0 1em 0;
+}
+
+.project-header {
+ display: flex;
+}
+
+.project-header-button {
+	text-align: center;
+	width: 2em;
+}
+
+.project .add-task {
+	outline: 1px solid red;
+	margin-left: auto;
+}
+
+.project .sort {
+	outline: 1px solid red;
+}
+
+.tasks-container .task:first-child {
+	margin-top: 1em;
+}
+
+.task {
+	background-color: var(--task-bg-color);
+	color: var(--task-text-color);
+	border: var(--task-border-size) solid var(--task-border-color);
+	border-radius: var(--task-border-radius);
+	padding: 0.5em;
+	margin: 0.5em 0;
+}
+
+
