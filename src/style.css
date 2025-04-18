@@ -1,6 +1,8 @@
 :root {
-	--title-color: #fff;
-	--bg-color: #123;
+	--title-color: #d55;
+	--bg-color: #cdc;
+
+	--main-text-color: #055;
 
 	--task-bg-color: #fff;
 	--task-border-color: #1bf;
@@ -16,6 +18,16 @@
 	--state-color-sleep: #335;
 }
 
+@font-face {
+	font-family: "NationalPark";
+	src: url("./assets/NationalPark.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Nunito";
+	src: url("./assets/NunitoSans.woff2") format("woff2");
+}
+
 * {
 	box-sizing: border-box;
 	padding: 0;
@@ -23,9 +35,10 @@
 }
 
 body {
+	font-family: "NationalPark", sans-serif;
 	font-size: calc(0.75em + 0.75vh);
 	background-color: var(--bg-color);
-	color: var(--title-color);
+	color: var(--main-text-color);
 	margin: 1em;
 }
 
@@ -35,7 +48,9 @@ body {
 
 .main-title-container {
 	/* outline: 1px solid red; */
+	font-family: "Nunito", sans-serif;
 	text-align: center;
+	color: var(--title-color);
 }
 
 .projects-container {
@@ -46,21 +61,29 @@ body {
 }
 
 .project-header {
- display: flex;
+	font-size: 0.9em;
+	display: flex;
+	margin: 0 1em 0 1em;
+	/* background-color: var(--task-border-color); */
+	/* color: var(--bg-color); */
+}
+
+.project-header .project-name {
+	font-weight: bold;
 }
 
 .project-header-button {
 	text-align: center;
-	width: 2em;
+	width: 2rem;
 }
 
 .project .add-task {
-	outline: 1px solid red;
 	margin-left: auto;
 }
 
-.project .sort {
+.project .sort,.add-task {
 	outline: 1px solid red;
+	align-content: end;
 }
 
 .tasks-container .task:first-child {
@@ -68,12 +91,29 @@ body {
 }
 
 .task {
+	display: flex;
+	/* flex-direction: row; */
+	margin: 0.5rem 0;
+}
+
+.task-status-icon {
+	outline: 1px solid red;
+	height: 100%;
+	width: 2em;
+}
+
+.task-text {
+	font-family: "Nunito", sans-serif;
+	font-size: 0.9rem;
 	background-color: var(--task-bg-color);
 	color: var(--task-text-color);
 	border: var(--task-border-size) solid var(--task-border-color);
 	border-radius: var(--task-border-radius);
-	padding: 0.5em;
-	margin: 0.5em 0;
+	padding: 0.5rem;
+}
+
+.task-text .task-due-date {
+	font-size: 0.7rem;
 }
 
 

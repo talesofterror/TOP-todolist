@@ -19,6 +19,7 @@ console.log(testTask2.getDate)
 
 console.log(testProject)
 console.log(testProject2)
+console.log(testProject2.tasks[0])
 
 
 
