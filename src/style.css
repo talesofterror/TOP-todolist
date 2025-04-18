@@ -1,10 +1,13 @@
 :root {
 	--title-color: #d55;
-	--bg-color: #cdc;
+	--bg-color: #222;
 
-	--main-text-color: #055;
+	--main-text-color: #555;
 
-	--task-bg-color: #fff;
+	--project-bg-color: #ddd;
+	--project-text-color: #d55;
+
+	--task-bg-color: #eee;
 	--task-border-color: #1bf;
 	--task-text-color: #000;
 	--task-border-size: 2px;
@@ -60,10 +63,16 @@ body {
 	margin: 1em 0 1em 0;
 }
 
+.project {
+	background-color: var(--project-bg-color);
+	border-radius: 1em;
+	padding: 0.5rem;
+}
+
 .project-header {
 	font-size: 0.9em;
 	display: flex;
-	margin: 0 1em 0 1em;
+	margin: 0 1em 0 0;
 	/* background-color: var(--task-border-color); */
 	/* color: var(--bg-color); */
 }
@@ -86,23 +95,31 @@ body {
 	align-content: end;
 }
 
+.tasks-container {
+	margin-left: 1em;
+}
+
 .tasks-container .task:first-child {
 	margin-top: 1em;
 }
 
 .task {
 	display: flex;
+	align-items: center;
 	/* flex-direction: row; */
 	margin: 0.5rem 0;
 }
 
 .task-status-icon {
-	outline: 1px solid red;
-	height: 100%;
+	height: 2em;
 	width: 2em;
+	margin-right: 0.2rem;
+	border: var(--task-border-color) var(--task-border-size) solid;
+	border-radius: 10rem;
 }
 
 .task-text {
+	flex-grow: 1;
 	font-family: "Nunito", sans-serif;
 	font-size: 0.9rem;
 	background-color: var(--task-bg-color);
