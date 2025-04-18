@@ -18,7 +18,7 @@ class Task {
 }
 
 class Project {
-	constructor (title, tasks) {
+	constructor (title, ...tasks) {
 		this.title = title
 		this.tasks = tasks == undefined ? {} : {...tasks}
 	}
