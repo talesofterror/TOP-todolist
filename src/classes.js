@@ -1,3 +1,5 @@
+const Elements = require("./elements.js")
+
 class Task {
 	constructor (title) {
 		this.title = title
@@ -21,6 +23,7 @@ class Project {
 	constructor (title, ...tasks) {
 		this.title = title
 		this.tasks = tasks == undefined ? {} : {...tasks}
+		this.elements = Elements.createProject(this.title)
 	}
 
 	addTasks (...tasks) {
