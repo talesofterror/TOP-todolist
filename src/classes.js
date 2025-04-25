@@ -1,8 +1,12 @@
 const Elements = require("./elements.js")
 
 class Task {
-	constructor (title) {
+	constructor (title, project) {
 		this.title = title
+		this.project = project
+		project.addTasks(this)
+		this.elements = Elements.createTask(this.title)
+		project.elements.tasksContainer.append(this.elements.group)
 	}
 
 	dueDate = new Date()
@@ -10,8 +14,6 @@ class Task {
 	priority
 	notes = ""
 	state
-
-	elements = {}
 	
 	get dueDate () {
 		return `${this.dueDate.toLocaleDateString("default", {month: 'long'})} ${this.dueDate.getDate()}, ${this.dueDate.getFullYear()}`
@@ -28,6 +30,10 @@ class Project {
 
 	addTasks (...tasks) {
 		Object.assign(this.tasks, {...tasks})
+	}
+
+	displayProject() {
+		Elements.projectsContainer.append(this.elements.group)
 	}
 }
 
