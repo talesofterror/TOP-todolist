@@ -10,9 +10,13 @@ class Task {
 	}
 
 	dueDate = new Date()
-	description = ""
 	priority
-	notes = ""
+	_notes
+	set notes(text) {
+		this._notes = text
+		this.elements.notes.textContent = this._notes
+	}
+	get notes() {return this._notes}
 	state
 	
 	get dueDate () {
