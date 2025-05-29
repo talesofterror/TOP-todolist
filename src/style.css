@@ -64,6 +64,10 @@ body {
 	color: var(--title-color);
 	border: var(--task-border-size) solid var(--title-border-color);
 	border-radius: var(--task-border-radius);
+	margin-bottom: 0rem;
+}
+
+.header-nav {
 	margin-bottom: 1rem;
 }
 
