@@ -39,6 +39,7 @@ class Project {
 	displayProject() {
 		Elements.projectsContainer.append(this.elements.group)
 	}
+
 }
 
 module.exports = {Task, Project}

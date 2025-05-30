@@ -1,5 +1,10 @@
 const {Task, Project}  = require("./classes.js")
+const Elements = require("./elements.js")
 require("./style.css")
+
+Elements.newProjectButton.addEventListener("click", () => {
+	Elements.toggleNewProjectForm(true)
+})
 
 const project1 = new Project("New Project")
 const task1 = new Task("Say hello", project1)
