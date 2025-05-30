@@ -81,6 +81,23 @@ class Elements {
 			elementObj.title.style.textDecoration = "none"
 		}
 	}
+
+	static newProjectButton = document.getElementById("new-project-button")
+	static newProjectForm = document.getElementById("new-project-form-container")
+
+	static toggleNewProjectForm (state) {
+		if (state == false) {
+			Elements.newProjectButton.classList.remove("invisible")
+			Elements.newProjectForm.classList.add("invisible")
+		} else {
+			Elements.newProjectButton.classList.add("invisible")
+			Elements.newProjectForm.classList.remove("invisible")
+		}
+	}
+
+	static newProjectLoop () {
+
+	}
 }
 
 function createElement (type, ...classes) {

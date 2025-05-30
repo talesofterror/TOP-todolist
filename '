@@ -13,15 +13,17 @@
 				<h2>~to do list~</h2>
 			</header>
 
+			<nav class="header-nav">
+				<div class="header-nav-new project-header-button">new project</div>
+				<div class="header-nav-about project-header-button">about</div>
+			</nav>
+
 			<main class="projects-container" id="projects-container">
 				
-				<div class="project">
-					<div id="new-project-form-container" class="invisible">
-						<form action="" id="new-project-form" class="project-header">
-							<input type="text" id="project-name" class="form-input project-name">
-						</form>
-					</div>
-					<div id="new-project-button">+new project</div>
+				<div id="new-project-form-container" class="project">
+					<form action="" id="new-project-form" class="project-header">
+						<input type="text" id="project-name" class="form-input project-name">
+					</form>
 				</div>
 
 				<section class="project">
