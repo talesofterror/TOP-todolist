@@ -6,6 +6,7 @@
 	/* --bg-color: #ddd; */
 
 	--main-text-color: #1bf;
+	--input-placeholder-color: #daa;
 
 	--project-bg-color: #09d;
 	/* --project-bg-color: #ffc; */
@@ -56,12 +57,19 @@ body {
 }
 
 input {
-	appearance: none;
-	-webkit-appearance: none;
+	vertical-align: center;
 	background: none;
+	font-size: 0.9rem;
 	border: none;
 	outline: none;
 	height: auto;
+}
+input::placeholder {
+	appearance: none;
+	-webkit-appearance: none;
+
+	color: var(--input-placeholder-color);
+	line-height: 1em;
 }
 
 .main-title-container {
@@ -96,6 +104,9 @@ input {
 	font-family: "Nunito", sans-serif;
 	font-weight: bold;
 	text-align: center;
+}
+#new-project-button:hover {
+	color: #fdd;
 }
 
 .project-header {
@@ -134,9 +145,11 @@ input {
 	display: flex;
 	justify-content: flex-start;
 	margin-top: 0.2rem;
+	gap: 0.3rem;
 }
 
 .project-header-button {
+	display: inline-block;
 	font-size: 0.8rem;
 	font-weight: bold;
 	color: var(--project-button-color);
@@ -144,8 +157,13 @@ input {
 	border: var(--task-border-size) solid var(--task-border-color);
 	border-radius: var(--task-border-radius);
 	text-align: center;
+	width: fit-content;
 	min-width: 5rem;
 	margin-left: 0rem;
+}
+
+#new-project-form-container .project-header-button {
+	width: fit-content;
 }
 
 .tasks-container {
