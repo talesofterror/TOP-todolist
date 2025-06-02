@@ -6,18 +6,25 @@ class Elements {
 
 	static projectsContainer = document.getElementById("projects-container")
 
+	static newProjectButton = document.getElementById("new-project-button")
+	static newProjectForm = document.getElementById("new-project-form-container")
+	static inputProjectName = document.getElementById("input-project-name")
+	static newProjectFormContainer = document.getElementById("new-project-form")
+	static newProjectCancelButton = document.getElementById("add-project-cancel-button")
+	static newProjectSubmitButton = document.getElementById("add-project-button")
+
 	static createProject (_title) {
 		let elementObj = {
-			group: createElement("section", "project"),
-			header: createElement("div", "project-header"),
-			button_Display: createElement("div", "project-display-button"),
-			img_Expand: createElement("img", "project-expand-img"),
-			title: createElement("header", "project-name"),
-			content: createElement("div", "project-content"),
-			nav: createElement("nav", "project-nav"),
-			button_AddTask: createElement("div", "add-task", "project-header-button"),
-			button_SortTasks: createElement("div", "sort", "project-header-button"),
-			tasksContainer: createElement("section", "tasks-container")
+			group: this.createElement("section", "project"),
+			header: this.createElement("div", "project-header"),
+			button_Display: this.createElement("div", "project-display-button"),
+			img_Expand: this.createElement("img", "project-expand-img"),
+			title: this.createElement("header", "project-name"),
+			content: this.createElement("div", "project-content"),
+			nav: this.createElement("nav", "project-nav"),
+			button_AddTask: this.createElement("div", "add-task", "project-header-button"),
+			button_SortTasks: this.createElement("div", "sort", "project-header-button"),
+			tasksContainer: this.createElement("section", "tasks-container")
 		}
 
 		elementObj.group.append(elementObj.header, elementObj.content)
@@ -52,13 +59,13 @@ class Elements {
 
 	static createTask (text) {
 		let elementObj = {
-			group: createElement("div", "task"),
-			status: createElement("div", "task-status-icon", "priority-1"),
-			text: createElement("div", "task-text"),
-			title: createElement("header", "task-title"),
-			dueDate: createElement("div", "task-due-date"),
-			content: createElement("div", "task-content"),
-			notes: createElement("div", "task-content-notes")
+			group: this.createElement("div", "task"),
+			status: this.createElement("div", "task-status-icon", "priority-1"),
+			text: this.createElement("div", "task-text"),
+			title: this.createElement("header", "task-title"),
+			dueDate: this.createElement("div", "task-due-date"),
+			content: this.createElement("div", "task-content"),
+			notes: this.createElement("div", "task-content-notes")
 		}
 
 		elementObj.group.append(elementObj.status, elementObj.text)
@@ -82,28 +89,13 @@ class Elements {
 		}
 	}
 
-	static newProjectButton = document.getElementById("new-project-button")
-	static newProjectForm = document.getElementById("new-project-form-container")
-
-	static toggleNewProjectForm (state) {
-		if (state == false) {
-			Elements.newProjectButton.classList.remove("invisible")
-			Elements.newProjectForm.classList.add("invisible")
-		} else {
-			Elements.newProjectButton.classList.add("invisible")
-			Elements.newProjectForm.classList.remove("invisible")
-		}
+	static createElement (type, ...classes) {
+		let element = document.createElement(type)
+		element.classList.add(...classes)
+		return element
 	}
 
-	static newProjectLoop () {
-
-	}
 }
 
-function createElement (type, ...classes) {
-	let element = document.createElement(type)
-	element.classList.add(...classes)
-	return element
-}
 
 module.exports = Elements
