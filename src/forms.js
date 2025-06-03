@@ -1,4 +1,5 @@
 // const {Task, Project}  = require("./classes.js")
+const { Project } = require("./classes.js")
 const Elements = require("./elements.js")
 
 class Forms {
@@ -10,6 +11,8 @@ class Forms {
 		this.projectFormOpen = false
 		this.taskFormOpen = false
 
+		Elements.newProjectFormContainer.onsubmit = Forms.addProject
+
 		Elements.newProjectButton.addEventListener("click", () => {
 			console.log("new project button click listener called")
 			Forms.newProjectLoop()
@@ -19,6 +22,10 @@ class Forms {
 			Forms.toggleNewProjectForm(false)
 			Elements.newProjectFormContainer.reset()
 		} )
+
+		Elements.newProjectSubmitButton.addEventListener( "click", ()=> {
+			Forms.addProject()
+		})
 	}
 	
 	static toggleNewProjectForm (state) {
@@ -38,7 +45,11 @@ class Forms {
 	}
 
 	static addProject () {
-		
+		let newProject = new Project(Elements.inputProjectName.value)
+		newProject.displayProject()
+		Forms.toggleNewProjectForm(false)
+		Elements.newProjectFormContainer.reset()
+		return false
 	}
 	
 }

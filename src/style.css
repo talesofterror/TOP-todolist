@@ -64,10 +64,12 @@ input {
 	outline: none;
 	height: auto;
 }
+input:focus {
+	background: none;
+}
 input::placeholder {
 	appearance: none;
 	-webkit-appearance: none;
-
 	color: var(--input-placeholder-color);
 	line-height: 1em;
 }
@@ -201,6 +203,10 @@ input::placeholder {
 	padding: 0.2rem 0.5rem;
 }
 
+.task-title {
+	text-decoration: underline;
+}
+
 .task-due-date {
 	color: var(--task-date-color);
 	font-size: 0.7rem;
@@ -208,6 +214,7 @@ input::placeholder {
 
 .task-content-notes {
 	font-weight: normal;
+	text-decoration: none;
 }
 
 .priority-1 {
