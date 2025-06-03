@@ -26,6 +26,7 @@ class Task {
 }
 
 class Project {
+
 	constructor (title, ...tasks) {
 		this.title = title
 		this.tasks = tasks == undefined ? {} : {...tasks}
@@ -37,7 +38,14 @@ class Project {
 	}
 
 	displayProject() {
-		Elements.projectsContainer.append(this.elements.group)
+		let projectContainerChildren = Elements.projectsContainer.children
+
+		if (projectContainerChildren.length == 1) {
+			Elements.projectsContainer.append(this.elements.group)
+		} else {
+			let targetNode = projectContainerChildren[0]
+			Elements.projectsContainer.insertBefore(this.elements.group, targetNode)
+		}
 	}
 
 }

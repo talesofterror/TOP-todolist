@@ -1,4 +1,5 @@
 const {Task, Project}  = require("./classes.js")
+const Elements = require("./elements.js")
 const Forms = require("./forms.js")
 // const Elements = require("./elements.js")
 require("./style.css")
@@ -15,6 +16,10 @@ task1.notes = "This is the task description. What am I describing? Nothing in pa
 
 project1.displayProject()
 project2.displayProject()
+
+console.log(Elements.projectsContainer.children)
+console.log(Elements.projectsContainer.children[0])
+console.log(Elements.projectsContainer.children[0].parentNode)
 
 task2.notes = "This is another task. Hi."
 
