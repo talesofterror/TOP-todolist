@@ -14,13 +14,15 @@ else
   set shortmess=aoO
 endif
 badd +1 src/index.js
-badd +1 src/elements.js
+badd +82 src/elements.js
 badd +12 src/classes.js
-badd +1 src/style.css
+badd +238 src/style.css
 badd +61 src/template.html
+badd +0 src/forms.js
 argglobal
 %argdel
 $argadd NvimTree_1
+tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
@@ -38,11 +40,11 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 43 - ((29 * winheight(0) + 27) / 54)
+let s:l = 31 - ((17 * winheight(0) + 27) / 54)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 43
+keepjumps 31
 normal! $
 lcd ~/personal-repos/TOP-todolist
 tabnext
@@ -58,11 +60,11 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 199 - ((53 * winheight(0) + 27) / 54)
+let s:l = 238 - ((23 * winheight(0) + 27) / 54)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 199
+keepjumps 238
 normal! 0
 lcd ~/personal-repos/TOP-todolist
 tabnext
@@ -78,11 +80,11 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 10 - ((9 * winheight(0) + 27) / 54)
+let s:l = 15 - ((14 * winheight(0) + 27) / 54)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 10
+keepjumps 15
 normal! 0108|
 lcd ~/personal-repos/TOP-todolist
 tabnext
@@ -98,47 +100,15 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 54 - ((53 * winheight(0) + 27) / 54)
+let s:l = 82 - ((41 * winheight(0) + 27) / 54)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 54
+keepjumps 82
 normal! 022|
 lcd ~/personal-repos/TOP-todolist
 tabnext
-edit ~/personal-repos/TOP-todolist/src/classes.js
-let s:save_splitbelow = &splitbelow
-let s:save_splitright = &splitright
-set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
-let &splitbelow = s:save_splitbelow
-let &splitright = s:save_splitright
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-exe 'vert 1resize ' . ((&columns * 30 + 105) / 210)
-exe 'vert 2resize ' . ((&columns * 179 + 105) / 210)
-argglobal
-enew
-file ~/personal-repos/TOP-todolist/NvimTree_6
-balt ~/personal-repos/TOP-todolist/src/classes.js
-setlocal fdm=manual
-setlocal fde=0
-setlocal fmr={{{,}}}
-setlocal fdi=#
-setlocal fdl=0
-setlocal fml=1
-setlocal fdn=20
-setlocal nofen
-lcd ~/personal-repos/TOP-todolist
-wincmd w
+edit ~/personal-repos/TOP-todolist/src/forms.js
 argglobal
 setlocal fdm=manual
 setlocal fde=0
@@ -150,25 +120,40 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 12 - ((11 * winheight(0) + 27) / 54)
+let s:l = 48 - ((44 * winheight(0) + 27) / 54)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
-normal! 022|
+keepjumps 48
+normal! 0
 lcd ~/personal-repos/TOP-todolist
-wincmd w
-exe 'vert 1resize ' . ((&columns * 30 + 105) / 210)
-exe 'vert 2resize ' . ((&columns * 179 + 105) / 210)
-tabnext 1
+tabnext
+edit ~/personal-repos/TOP-todolist/src/classes.js
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 13 - ((12 * winheight(0) + 27) / 54)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 13
+normal! 010|
+lcd ~/personal-repos/TOP-todolist
+tabnext 5
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
 let &shortmess = s:shortmess_save
-let &winminheight = s:save_winminheight
-let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

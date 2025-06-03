@@ -235,5 +235,21 @@ input::placeholder {
 
 .bold {
 	font-weight: bold;
+ }
+
+.project-input-error {
+	animation: 0.5s 2 alternate projectInputError;
+}
+
+@keyframes projectInputError {
+	0% {
+		color: var(--input-placeholder-color);
+	}
+	50% {
+		color: var(--bg-color);
+	}
+	100% {
+		color: var(--project-button-color);
+	}
 }
 

@@ -41,10 +41,12 @@ class Forms {
 	static newProjectLoop () {
 		Forms.toggleNewProjectForm(true)
 		Elements.inputProjectName.focus()
-
 	}
 
 	static addProject () {
+		if (Elements.inputProjectName.value == "") {
+			return false
+		}
 		let newProject = new Project(Elements.inputProjectName.value)
 		newProject.displayProject()
 		Forms.toggleNewProjectForm(false)

@@ -16,7 +16,7 @@
 			<div class="project">
 				<div id="new-project-form-container" class="invisible">
 					<form id="new-project-form" class="project-header">
-						<input type="text" id="input-project-name" class="form-input project-name" placeholder="enter project name">
+						<input type="text" id="input-project-name" class="form-input project-name" placeholder="enter project name" pattern="[\S\s]+[\S]+">
 					</form>
 					<div class="project-nav">
 						<div id="add-project-button" class="project-header-button">add project</div>
@@ -27,8 +27,70 @@
 			</div>
 
 			<main class="projects-container" id="projects-container">
-				
-		</main>
+<!-- PROJECTS GO HERE -->
+
+				<section class="project">
+					<div class="project-header">
+						<div class="project-display-button">V</div>
+						<header class="project-name">
+							Project 1 Project 1 Project 1 Project 1 Project 1 
+						</header>
+					</div>
+
+					<div class="project-content">
+
+						<nav class="project-nav">
+							<div class="add-task project-header-button">+</div>
+							<div class="sort project-header-button">(s)</div>
+						</nav>
+
+						<div class="task">
+							<div class="task-status-icon"></div>
+							<div class="task-text">
+								<input type="text" class="task-title">
+								<input type="date" class="task-due-date">
+								<input type="text" class="task-content-notes">
+							</div>
+						</div>
+
+						<section class="tasks-container">
+
+							<div class="task">
+								<div class="task-status-icon priority-1"></div>
+								<header class="task-text">
+									<span>Do this thing</span>
+									<div class="task-due-date">01/02/2025</div>
+								</header>
+							</div>
+
+							<div class="task">
+								<div class="task-status-icon priority-3"></div>
+								<header class="task-text">
+									<span>Do this thing</span>
+									<div class="task-due-date">01/02/2025</div>
+								</header>
+							</div>
+
+							<div class="task">
+								<div class="task-status-icon priority-2"></div>
+								<div class="task-text">
+									<header class="task-title">Do this thing</header>
+									<div class="task-due-date">01/02/2025</div>
+									<div class="task-content">
+										<div class="task-content-notes">These are some notes for this task. Hi. Lorem ipsum dolor sit, amet consectetur adipisicing elit. At, tempore.</div>
+									</div>
+								</div>
+							</div>
+
+						</section>
+
+					</div>
+
+				</section>
+
+
+			</main>
+
 	</div>
 
 	</body>
