@@ -73,6 +73,24 @@ input::placeholder {
 	color: var(--input-placeholder-color);
 	line-height: 1em;
 }
+.task-adder {
+	flex-wrap: wrap;
+}
+.task-adder-buttons {
+	flex-basis: 100%;
+	margin-left: calc(var(--task-status-icon-size) + 0.25rem);
+}
+.task-adder input {
+	text-decoration: none;
+	margin: 0.3rem 0;
+}
+input[type="date"] {
+	display: block;
+	padding: 0.5rem;
+	border: 1px solid black;
+	border-radius: var(--task-border-radius);
+
+}
 
 .main-title-container {
 	font-family: "NationalPark", sans-serif;
