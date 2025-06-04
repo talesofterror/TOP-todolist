@@ -56,18 +56,19 @@ body {
 	margin: 1rem;
 }
 
-input {
+textarea {
 	vertical-align: center;
 	background: none;
 	font-size: 0.9rem;
 	border: none;
 	outline: none;
 	height: auto;
+	width: 100%;
 }
-input:focus {
+textarea:focus {
 	background: none;
 }
-input::placeholder {
+textarea::placeholder {
 	appearance: none;
 	-webkit-appearance: none;
 	color: var(--input-placeholder-color);
@@ -80,7 +81,7 @@ input::placeholder {
 	flex-basis: 100%;
 	margin-left: calc(var(--task-status-icon-size) + 0.25rem);
 }
-.task-adder input {
+.task-adder textarea {
 	text-decoration: none;
 	margin: 0.3rem 0;
 }
