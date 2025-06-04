@@ -24,7 +24,8 @@ class Elements {
 			nav: this.createElement("nav", "project-nav"),
 			button_AddTask: this.createElement("div", "add-task", "project-header-button"),
 			button_SortTasks: this.createElement("div", "sort", "project-header-button"),
-			tasksContainer: this.createElement("section", "tasks-container")
+			tasksContainer: this.createElement("section", "tasks-container"),
+			taskAdder: Elements.createNewTaskForm()
 		}
 
 		elementObj.group.append(elementObj.header, elementObj.content)
@@ -45,6 +46,43 @@ class Elements {
 		elementObj.button_SortTasks.textContent = "sort tasks"
 
 		return elementObj
+	}
+	
+	static createNewTaskForm () {
+		let group = Elements.createElement("div", "task", "task-adder")
+		let statusIcon = Elements.createElement("div", "taskStatusIcon")
+		let text = Elements.createElement("div", "task-text")
+		let buttons = Elements.createElement("div", "task-adder-buttons")
+		let addButton = Elements.createElement("div", "project-header-button")
+		let cancelButton = Elements.createElement("div", "project-header-button")
+
+		let inputTitle = Elements.createElement("textarea", "task-title")
+		let inputDueDate = Elements.createElement("input", "task-due-date")
+		let inputNotes = Elements.createElement("textarea", "task-content-notes")
+
+		inputTitle.placeholder = "enter task title"
+		let datePlaceholder = new Date()
+		inputDueDate.value = datePlaceholder.toLocaleString()
+
+		group.append(statusIcon, text, buttons)
+		text.append(inputTitle, inputDueDate, inputNotes)
+		buttons.append(addButton, cancelButton)
+
+		addButton.addEventListener("click", ()=> {
+
+		})
+
+		inputTitle.addEventListener("input", () => {
+			inputTitle.style.height = "0px";
+		  inputTitle.style.height = inputTitle.scrollHeight + "px";
+		})
+
+		inputNotes.addEventListener("input", () => {
+			inputNotes.style.height = "0px";
+		  inputNotes.style.height = inputTitle.scrollHeight + "px";
+		})
+
+		return group
 	}
 
 	static projectCollapseToggle (elementObj) {

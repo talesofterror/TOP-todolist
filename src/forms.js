@@ -4,12 +4,7 @@ const Elements = require("./elements.js")
 
 class Forms {
 
-	static projectFormOpen
-	static taskFormOpen
-
 	static initializeForms () {
-		this.projectFormOpen = false
-		this.taskFormOpen = false
 
 		Elements.newProjectFormContainer.onsubmit = Forms.addProject
 
@@ -25,6 +20,11 @@ class Forms {
 
 		Elements.newProjectSubmitButton.addEventListener( "click", ()=> {
 			Forms.addProject()
+		})
+
+		Elements.inputProjectName.addEventListener("input", () => {
+			Elements.inputProjectName.style.height = '0px';
+		  Elements.inputProjectName.style.height = Elements.inputProjectName.scrollHeight + 'px';	
 		})
 	}
 	

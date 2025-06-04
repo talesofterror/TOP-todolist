@@ -16,7 +16,7 @@
 			<div class="project">
 				<div id="new-project-form-container" class="invisible">
 					<form id="new-project-form" class="project-header">
-						<input type="text" id="input-project-name" class="form-input project-name" placeholder="enter project name" pattern="[\S\s]+[\S]+">
+						<textarea id="input-project-name" class="form-input project-name" placeholder="enter project name" pattern="[\S\s]+[\S]+"></textarea>
 					</form>
 					<div class="project-nav">
 						<div id="add-project-button" class="project-header-button">add project</div>
@@ -47,9 +47,9 @@
 						<div class="task task-adder">
 							<div class="task-status-icon"></div>
 							<div class="task-text">
-								<input type="text" class="task-title" placeholder="enter task title">
+								<textarea type="text" class="task-title" placeholder="enter task title" rows="1"></textarea>
 								<input type="date" class="task-due-date" value="2025-06-03">
-								<input type="text" class="task-content-notes" placeholder="enter task notes">
+								<textarea class="task-content-notes" placeholder="enter task notes" rows="1"></textarea>
 							</div>
 							<div class="task-adder-buttons">
 								<div class="project-header-button">add</div>
