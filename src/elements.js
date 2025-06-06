@@ -66,9 +66,8 @@ class Elements {
 
 		inputTitle.placeholder = "enter task title"
 		inputTitle.rows = 1
-		let datePlaceholder = new Date()
 		inputDueDate.type = "date"
-		inputDueDate.value = "yyyy-mm-dd"
+		inputDueDate.valueAsDate = new Date();
 		inputNotes.placeholder = "enter task notes"
 		inputNotes.rows = 1
 		addButton.textContent = "add"
@@ -139,6 +138,25 @@ class Elements {
 		} else {
 			element.classList.add("invisible")
 		}
+	}
+
+	static invalidFlash (...elements) {
+		for (let e of elements) {
+			if (Elements.inputEmpty(e)){
+			e.classList.add("invalid-flash")
+			setTimeout(()=>{
+				e.classList.remove("invalid-flash")
+			}, "1000")
+			return true
+			}
+		}
+	}
+
+	static inputEmpty (element) {
+		let test = new RegExp(/^\s*$/)
+		if (test.test(element.value)) {
+			return true
+		} else return false
 	}
 
 	static createElement (type, ...classes) {
