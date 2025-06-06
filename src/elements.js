@@ -31,14 +31,18 @@ class Elements {
 		elementObj.group.append(elementObj.header, elementObj.content)
 		elementObj.header.append(elementObj.button_Display, 
 			elementObj.title)
-		elementObj.content.append(elementObj.nav, elementObj.tasksContainer)
+		elementObj.content.append(elementObj.nav, elementObj.taskAdder.group, elementObj.tasksContainer)
 		elementObj.nav.append(elementObj.button_AddTask, elementObj.button_SortTasks)
 
 		elementObj.img_Expand.src = collapseImg
 		elementObj.button_Display.append(elementObj.img_Expand)
 
-		elementObj.button_Display.addEventListener("click", (e) => {
+		elementObj.button_Display.addEventListener("click", () => {
 			Elements.projectCollapseToggle(elementObj)
+		})
+
+		elementObj.button_AddTask.addEventListener("click", ()=> {
+			Elements.toggleInvisible(elementObj.taskAdder.group)
 		})
 
 		elementObj.title.textContent = _title
@@ -49,8 +53,8 @@ class Elements {
 	}
 	
 	static createNewTaskForm () {
-		let group = Elements.createElement("div", "task", "task-adder")
-		let statusIcon = Elements.createElement("div", "taskStatusIcon")
+		let group = Elements.createElement("div", "task", "task-adder", "invisible")
+		let statusIcon = Elements.createElement("div", "task-status-icon")
 		let text = Elements.createElement("div", "task-text")
 		let buttons = Elements.createElement("div", "task-adder-buttons")
 		let addButton = Elements.createElement("div", "project-header-button")
@@ -61,16 +65,18 @@ class Elements {
 		let inputNotes = Elements.createElement("textarea", "task-content-notes")
 
 		inputTitle.placeholder = "enter task title"
+		inputTitle.rows = 1
 		let datePlaceholder = new Date()
-		inputDueDate.value = datePlaceholder.toLocaleString()
+		inputDueDate.type = "date"
+		inputDueDate.value = "yyyy-mm-dd"
+		inputNotes.placeholder = "enter task notes"
+		inputNotes.rows = 1
+		addButton.textContent = "add"
+		cancelButton.textContent = "cancel"
 
 		group.append(statusIcon, text, buttons)
 		text.append(inputTitle, inputDueDate, inputNotes)
 		buttons.append(addButton, cancelButton)
-
-		addButton.addEventListener("click", ()=> {
-
-		})
 
 		inputTitle.addEventListener("input", () => {
 			inputTitle.style.height = "0px";
@@ -82,7 +88,7 @@ class Elements {
 		  inputNotes.style.height = inputTitle.scrollHeight + "px";
 		})
 
-		return group
+		return {group, inputTitle, inputDueDate, inputNotes, addButton}
 	}
 
 	static projectCollapseToggle (elementObj) {
@@ -124,6 +130,14 @@ class Elements {
 		} else {
 			elementObj.content.classList.add("invisible")
 			elementObj.title.style.textDecoration = "none"
+		}
+	}
+
+	static toggleInvisible(element) {
+		if (element.classList.contains("invisible")) {
+			element.classList.remove("invisible")
+		} else {
+			element.classList.add("invisible")
 		}
 	}
 
