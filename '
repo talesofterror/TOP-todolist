@@ -3,11 +3,11 @@
 	--base2: #09d;
 	/* --base3: #fdd; */
 	--base3: #fde;
-	--accent1: #d55;
+	--accent-1: #d55;
 	/* --accent-1: #5d5; */
 
 
-	--title-color: var(--accent1);
+	--title-color: var(--accent-1);
 	--title-bg-color: var(--base3);
 	--title-border-color: #000;
 	--bg-color: var(--base1);
@@ -18,7 +18,7 @@
 	--project-bg-color: var(--base2);
 	--project-text-color: #000;
 	--project-header-bg-color: var(--base3);
-	--project-button-color: var(--accent1);
+	--project-button-color: var(--accent-1);
 
 	--task-bg-color: var(--base3);
 	--task-border-color: #000;
@@ -70,7 +70,6 @@ textarea {
 	height: auto;
 	width: 100%;
 	margin: 1em 0;
-	border-radius: var(--task-border-radius);
 }
 textarea:focus {
 	background: none;
@@ -242,7 +241,7 @@ input[type="date"] {
 }
 
 .task-due-date {
-	color: var(--accent1);
+	color: var(--task-date-color);
 	font-size: 0.7rem;
 }
 
@@ -272,7 +271,7 @@ input[type="date"] {
  }
 
 .invalid-flash {
-	animation: 0.2s 3 alternate invalid-flash-animation;
+	animation: 1s 2 alternate invalid-flash-animation;
 }
 
 @keyframes invalid-flash-animation {
@@ -280,10 +279,10 @@ input[type="date"] {
 		background-color: var(--base1);
 	}
 	50% {
-		background-color: var(--base2);
+		color: var(--base2);
 	}
 	100% {
-		background-color: var(--base1);
+		color: var(--base1);
 	}
 }
 

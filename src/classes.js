@@ -9,7 +9,14 @@ class Task {
 		project.elements.tasksContainer.append(this.elements.group)
 	}
 
-	dueDate = new Date()
+	_dueDate
+	set dueDate (date) {
+		this._dueDate = date
+		this.elements.dueDate.textContent = date
+	}
+	get dueDate () {
+		return this._dueDate
+	}
 	priority
 	_notes
 	set notes(text) {
@@ -18,10 +25,6 @@ class Task {
 	}
 	get notes() {return this._notes}
 	state
-	
-	get dueDate () {
-		return `${this.dueDate.toLocaleDateString("default", {month: 'long'})} ${this.dueDate.getDate()}, ${this.dueDate.getFullYear()}`
-	}
 
 	displayTask() {
 		let tasksContainer = this.project.elements.tasksContainer
@@ -45,14 +48,18 @@ class Project {
 		this.elements = Elements.createProject(this.title)
 
 		this.elements.taskAdder.addButton.addEventListener("click", ()=> {
-			let newTask = new Task(this.elements.taskAdder.inputTitle.value, this)
-			newTask.dueDate = this.elements.taskAdder.inputDueDate.value
-			newTask.notes = this.elements.taskAdder.inputNotes.value
-			this.elements.taskAdder.inputTitle.value = ""
-			this.elements.taskAdder.inputNotes.value = ""
-			this.elements.taskAdder.inputDueDate.value = "mm/dd/yyyy"
+			if (Elements.invalidFlash(this.elements.taskAdder.inputTitle, this.elements.taskAdder.inputNotes)){
+				return
+			} else {
+				let newTask = new Task(this.elements.taskAdder.inputTitle.value, this)
+				newTask.dueDate = this.elements.taskAdder.inputDueDate.value
+				newTask.notes = this.elements.taskAdder.inputNotes.value
+				this.elements.taskAdder.inputTitle.value = ""
+				this.elements.taskAdder.inputNotes.value = ""
+				this.elements.taskAdder.inputDueDate.valueAsDate = new Date()
 
-			newTask.displayTask()
+				newTask.displayTask()
+			}
 		})
 	}
 
