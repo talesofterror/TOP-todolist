@@ -23,6 +23,18 @@ class Task {
 		return `${this.dueDate.toLocaleDateString("default", {month: 'long'})} ${this.dueDate.getDate()}, ${this.dueDate.getFullYear()}`
 	}
 
+	displayTask() {
+		let tasksContainer = this.project.elements.tasksContainer
+		let tasksContainerChildren = this.project.elements.tasksContainer.children
+
+		if (tasksContainerChildren.length == 1) {
+			tasksContainer.append(this.elements.group)
+		} else {
+			let targetNode = tasksContainerChildren[0]
+			tasksContainer.insertBefore(this.elements.group, targetNode)
+		}
+	}
+
 }
 
 class Project {
@@ -31,6 +43,17 @@ class Project {
 		this.title = title
 		this.tasks = tasks == undefined ? {} : {...tasks}
 		this.elements = Elements.createProject(this.title)
+
+		this.elements.taskAdder.addButton.addEventListener("click", ()=> {
+			let newTask = new Task(this.elements.taskAdder.inputTitle.value, this)
+			newTask.dueDate = this.elements.taskAdder.inputDueDate.value
+			newTask.notes = this.elements.taskAdder.inputNotes.value
+			this.elements.taskAdder.inputTitle.value = ""
+			this.elements.taskAdder.inputNotes.value = ""
+			this.elements.taskAdder.inputDueDate.value = "mm/dd/yyyy"
+
+			newTask.displayTask()
+		})
 	}
 
 	addTasks (...tasks) {

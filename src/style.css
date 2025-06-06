@@ -1,20 +1,26 @@
 :root {
-	--title-color: #d55;
-	--title-bg-color: #fdd;
-	--title-border-color: #000;
-	--bg-color: #1bf;
-	/* --bg-color: #ddd; */
+	--base1: #1bf;
+	--base2: #09d;
+	/* --base3: #fdd; */
+	--base3: #fde;
+	--accent-1: #d55;
+	/* --accent-1: #5d5; */
 
-	--main-text-color: #1bf;
+
+	--title-color: var(--accent-1);
+	--title-bg-color: var(--base3);
+	--title-border-color: #000;
+	--bg-color: var(--base1);
+
+	--main-text-color: var(--base1);
 	--input-placeholder-color: #daa;
 
-	--project-bg-color: #09d;
-	/* --project-bg-color: #ffc; */
+	--project-bg-color: var(--base2);
 	--project-text-color: #000;
-	--project-header-bg-color: #fdd;
-	--project-button-color: #d55;
+	--project-header-bg-color: var(--base3);
+	--project-button-color: var(--accent-1);
 
-	--task-bg-color: #fdd;
+	--task-bg-color: var(--base3);
 	--task-border-color: #000;
 	--task-text-color: #000;
 	--task-border-size: 2px;
@@ -22,7 +28,7 @@
 
 	--task-status-icon-size: 2rem;
 	--task-status-icon-border-color: #000;
-	--task-date-color: #d55;
+	--task-date-color: var(--accent1);
 
 	--priority-1-color: #f45;
 	--priority-2-color: #dd4;
@@ -57,13 +63,13 @@ body {
 }
 
 textarea {
-	vertical-align: center;
 	background: none;
 	font-size: 0.9rem;
 	border: none;
 	outline: none;
 	height: auto;
 	width: 100%;
+	margin: 1em 0;
 }
 textarea:focus {
 	background: none;
@@ -74,23 +80,31 @@ textarea::placeholder {
 	color: var(--input-placeholder-color);
 	line-height: 1em;
 }
-.task-adder {
+.task.task-adder {
 	flex-wrap: wrap;
+	margin-bottom: 1rem;
 }
 .task-adder-buttons {
-	flex-basis: 100%;
+	height: 1rem;
 	margin-left: calc(var(--task-status-icon-size) + 0.25rem);
+}
+.task-adder-buttons div {
+	margin-right: 0.3rem;
 }
 .task-adder textarea {
 	text-decoration: none;
-	margin: 0.3rem 0;
+	margin: 0.5rem 0;
 }
 input[type="date"] {
 	display: block;
-	padding: 0.5rem;
+	background: none;
+	font-size: 0.9rem;
 	border: 1px solid black;
+	height: auto;
+	padding: 0.5rem;
+	border: none;
 	border-radius: var(--task-border-radius);
-
+	color: var(--input-placeholder-color);
 }
 
 .main-title-container {

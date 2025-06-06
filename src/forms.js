@@ -16,7 +16,7 @@ class Forms {
 		Elements.newProjectCancelButton.addEventListener( "click", ()=> {
 			Forms.toggleNewProjectForm(false)
 			Elements.newProjectFormContainer.reset()
-		} )
+		})
 
 		Elements.newProjectSubmitButton.addEventListener( "click", ()=> {
 			Forms.addProject()
