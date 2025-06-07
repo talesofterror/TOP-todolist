@@ -4,27 +4,48 @@ class Task {
 	constructor (title, project) {
 		this.title = title
 		this.project = project
+		this._priority = {index: 0, level: Task.priorityClasses[0]}
 		project.addTasks(this)
 		this.elements = Elements.createTask(this.title)
 		project.elements.tasksContainer.append(this.elements.group)
+		this.elements.status.addEventListener("click", ()=> {
+			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
+		})
+
+		// console.log("{ " + this.title + " }" + " priority level: ")
+ 		// console.log(this.priority)
 	}
+
+	static priorityClasses = ["priority-1", "priority-2", "priority-3", "priority-delete", "priority-complete"]
 
 	_dueDate
 	set dueDate (date) {
 		this._dueDate = date
 		this.elements.dueDate.textContent = date
 	}
-	get dueDate () {
-		return this._dueDate
-	}
-	priority
+	get dueDate () {return this._dueDate}
+
 	_notes
 	set notes(text) {
 		this._notes = text
 		this.elements.notes.textContent = this._notes
 	}
 	get notes() {return this._notes}
-	state
+
+
+	set priority (index) {
+		let last = this.priority.level
+
+		this._priority.index = index
+		this._priority.level = Task.priorityClasses[index]
+
+		this.elements.status.classList.replace(last, this.priority.level)
+
+		// console.log("{ " + this.title + " }" + " priority set to: ")
+		// console.log(this.priority)
+
+	}
+	get priority () {return this._priority}
 
 	displayTask() {
 		let tasksContainer = this.project.elements.tasksContainer
@@ -35,6 +56,14 @@ class Task {
 		} else {
 			let targetNode = tasksContainerChildren[0]
 			tasksContainer.insertBefore(this.elements.group, targetNode)
+		}
+	}
+
+	static returnNextIndex (array, index) {
+		if (index == array.length-1) {
+			return 0
+		} else {
+			return index+1
 		}
 	}
 

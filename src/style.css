@@ -2,13 +2,13 @@
 	--base1: #1bf;
 	--base2: #09d;
 	/* --base3: #fdd; */
-	--base3: #fde;
-	--accent1: #d55;
+	--accent1: #fde;
+	--accent2: #d55;
 	/* --accent-1: #5d5; */
 
 
-	--title-color: var(--accent1);
-	--title-bg-color: var(--base3);
+	--title-color: var(--accent2);
+	--title-bg-color: var(--accent1);
 	--title-border-color: #000;
 	--bg-color: var(--base1);
 
@@ -17,10 +17,10 @@
 
 	--project-bg-color: var(--base2);
 	--project-text-color: #000;
-	--project-header-bg-color: var(--base3);
-	--project-button-color: var(--accent1);
+	--project-header-bg-color: var(--accent1);
+	--project-button-color: var(--accent2);
 
-	--task-bg-color: var(--base3);
+	--task-bg-color: var(--accent1);
 	--task-border-color: #000;
 	--task-text-color: #000;
 	--task-border-size: 2px;
@@ -28,11 +28,15 @@
 
 	--task-status-icon-size: 2rem;
 	--task-status-icon-border-color: #000;
-	--task-date-color: var(--accent1);
+	--task-date-color: var(--accent2);
 
-	--priority-1-color: #f45;
-	--priority-2-color: #dd4;
-	--priority-3-color: #24f;
+	--priority-3-color: #f45;
+	--priority-2-color: #dd8;
+	--priority-1-color: #1bf;
+	--priority-delete-color: var(--accent1);
+	--priority-complete-color: #7d7;
+
+	--priority-complete-icon-color: #065;
 
 	--state-color-inactive: #122;
 	--state-color-sleep: #335;
@@ -259,7 +263,7 @@ input[type="date"] {
 
 .task-due-date {
 	grid-area: 2 / 1 / 3 / 2;
-	color: var(--accent1);
+	color: var(--accent2);
 	font-size: 0.7rem;
 }
 
@@ -284,6 +288,32 @@ input[type="date"] {
 
 .priority-3 {
 	background-color: var(--priority-3-color);
+}
+
+.priority-delete {
+	position: relative;
+	background-color: var(--priority-delete-color);
+}
+.priority-delete:before {
+	position: absolute;
+	bottom: 0.02rem;
+	height: 1.8rem;
+	width: 1.8rem;
+	content: url("./assets/cancel.svg");
+}
+
+.priority-complete {
+	position: relative;
+	background-color: var(--priority-complete-color);
+}
+.priority-complete:before {
+	--size: 1.5rem;
+	position: absolute;
+	bottom: 0.2rem;
+	left: 0.175rem;
+	height: var(--size);
+	width: var(--size);
+	content: url("./assets/archive-check.svg");
 }
 
 .invisible {
