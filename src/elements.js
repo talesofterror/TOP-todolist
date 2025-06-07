@@ -1,11 +1,11 @@
 let closeImg = require("./assets/cancel.svg")
 let expandImg = require("./assets/unfold-more-horizontal.svg")
 let collapseImg = require("./assets/unfold-less-horizontal.svg")
+let chevronImg = require("./assets/chevron-down.svg")
 
 class Elements {
 
 	static projectsContainer = document.getElementById("projects-container")
-
 	static newProjectButton = document.getElementById("new-project-button")
 	static newProjectForm = document.getElementById("new-project-form-container")
 	static inputProjectName = document.getElementById("input-project-name")
@@ -20,6 +20,7 @@ class Elements {
 			button_Display: this.createElement("div", "project-display-button"),
 			img_Expand: this.createElement("img", "project-expand-img"),
 			title: this.createElement("header", "project-name"),
+			img_Delete: this.createElement("img", "project-delete-img"),
 			content: this.createElement("div", "project-content"),
 			nav: this.createElement("nav", "project-nav"),
 			button_AddTask: this.createElement("div", "add-task", "project-header-button"),
@@ -30,12 +31,14 @@ class Elements {
 
 		elementObj.group.append(elementObj.header, elementObj.content)
 		elementObj.header.append(elementObj.button_Display, 
-			elementObj.title)
+			elementObj.title, elementObj.img_Delete)
+
 		elementObj.content.append(elementObj.nav, elementObj.taskAdder.group, elementObj.tasksContainer)
 		elementObj.nav.append(elementObj.button_AddTask, elementObj.button_SortTasks)
 
 		elementObj.img_Expand.src = collapseImg
 		elementObj.button_Display.append(elementObj.img_Expand)
+		elementObj.img_Delete.src = closeImg
 
 		elementObj.button_Display.addEventListener("click", () => {
 			Elements.projectCollapseToggle(elementObj)
@@ -104,18 +107,22 @@ class Elements {
 		let elementObj = {
 			group: this.createElement("div", "task"),
 			status: this.createElement("div", "task-status-icon", "priority-1"),
+			topRow: this.createElement("div", "task-top-row"),
 			text: this.createElement("div", "task-text"),
 			title: this.createElement("header", "task-title"),
+			button_Exand: this.createElement("img", "task-expand"),
 			dueDate: this.createElement("div", "task-due-date"),
 			content: this.createElement("div", "task-content"),
 			notes: this.createElement("div", "task-content-notes")
 		}
 
 		elementObj.group.append(elementObj.status, elementObj.text)
-		elementObj.group.addEventListener("click", () => {
+		elementObj.text.append(elementObj.topRow, elementObj.content)
+		elementObj.topRow.append(elementObj.title, elementObj.dueDate, elementObj.button_Exand)
+		elementObj.button_Exand.src = chevronImg
+		elementObj.button_Exand.addEventListener("click", () => {
 			Elements.taskCollapseToggle(elementObj)
 		})
-		elementObj.text.append(elementObj.title, elementObj.dueDate, elementObj.content)
 		elementObj.content.append(elementObj.notes)
 		elementObj.title.textContent = text
 
@@ -124,9 +131,11 @@ class Elements {
 
 	static taskCollapseToggle (elementObj) {
 		if (elementObj.content.classList.contains("invisible")) {
+			Elements.toggleFlipElement(elementObj.button_Exand, false)
 			elementObj.content.classList.remove("invisible")
 			elementObj.title.style.textDecoration = "underline"
 		} else {
+			Elements.toggleFlipElement(elementObj.button_Exand, true)
 			elementObj.content.classList.add("invisible")
 			elementObj.title.style.textDecoration = "none"
 		}
@@ -163,6 +172,14 @@ class Elements {
 		let element = document.createElement(type)
 		element.classList.add(...classes)
 		return element
+	}
+
+	static toggleFlipElement (element, state) {
+		if (state == false) {
+			element.classList.remove("flip")
+		} else {
+			element.classList.add("flip")
+		}
 	}
 
 }
