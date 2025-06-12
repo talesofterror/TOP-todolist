@@ -1,7 +1,9 @@
 const Elements = require("./elements.js")
 
 class Task {
+
 	constructor (title, project) {
+		this.id = this.createId()
 		this.title = title
 		this.project = project
 		this._priority = {index: 0, level: Task.priorityClasses[0]}
@@ -11,11 +13,16 @@ class Task {
 		this.elements.status.addEventListener("click", ()=> {
 			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
 		})
-
-		// console.log("{ " + this.title + " }" + " priority level: ")
- 		// console.log(this.priority)
+		this.elements.button_Menu.addEventListener("click", ()=> {
+			if (this.priority.level == "priority-delete") {
+				this.elements.group.remove()
+				this.project.deleteTask(this)
+			}
+			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
+		})
 	}
 
+	static taskCount = 0
 	static priorityClasses = ["priority-1", "priority-2", "priority-3", "priority-delete", "priority-complete"]
 
 	_dueDate
@@ -41,11 +48,27 @@ class Task {
 
 		this.elements.status.classList.replace(last, this.priority.level)
 
-		// console.log("{ " + this.title + " }" + " priority set to: ")
-		// console.log(this.priority)
-
+		if (this.priority.level == "priority-delete") {
+			this.elements.menu.classList.toggle("invisible")
+			this.elements.button_Menu.textContent = "Delete?"
+			this.elements.button_Menu.classList.toggle("task-text-menu-delete")
+		}
+		if (this.priority.level == "priority-complete") {
+			this.elements.button_Menu.textContent = "Mark complete?"
+			this.elements.button_Menu.classList.toggle("task-text-menu-delete")
+			this.elements.button_Menu.classList.toggle("task-text-menu-complete")
+		}
+		if (this.priority.level == "priority-1") {
+			this.elements.menu.classList.toggle("invisible")
+			this.elements.button_Menu.classList.toggle("task-text-menu-complete")
+		}
 	}
 	get priority () {return this._priority}
+
+	createId () {
+		Task.taskCount++
+		return Task.taskCount
+	}
 
 	displayTask() {
 		let tasksContainer = this.project.elements.tasksContainer
@@ -73,7 +96,7 @@ class Project {
 
 	constructor (title, ...tasks) {
 		this.title = title
-		this.tasks = tasks == undefined ? {} : {...tasks}
+		this.tasks = []
 		this.elements = Elements.createProject(this.title)
 
 		this.elements.taskAdder.addButton.addEventListener("click", ()=> {
@@ -93,7 +116,17 @@ class Project {
 	}
 
 	addTasks (...tasks) {
-		Object.assign(this.tasks, {...tasks})
+		this.tasks.push(tasks)
+		console.log(this.tasks)
+	}
+
+	deleteTask (task) {
+		for (let [index, t] of this.tasks.entries()) {
+			if (t.id == task.id) { 
+				this.tasks.splice(index, 1)
+			}
+		}
+		console.log(this.tasks)
 	}
 
 	displayProject() {
@@ -105,6 +138,7 @@ class Project {
 			let targetNode = projectContainerChildren[0]
 			Elements.projectsContainer.insertBefore(this.elements.group, targetNode)
 		}
+
 	}
 
 }
