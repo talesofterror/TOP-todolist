@@ -109,6 +109,8 @@ class Elements {
 			status: this.createElement("div", "task-status-icon", "priority-1"),
 			topRow: this.createElement("div", "task-top-row"),
 			text: this.createElement("div", "task-text"),
+			menu: this.createElement("div",  "task-text", "task-text-menu", "invisible"),
+			button_Menu: this.createElement("div", "task-text-menu-button"),
 			title: this.createElement("header", "task-title"),
 			button_Exand: this.createElement("img", "task-expand"),
 			dueDate: this.createElement("div", "task-due-date"),
@@ -117,13 +119,14 @@ class Elements {
 		}
 
 		elementObj.group.append(elementObj.status, elementObj.text)
-		elementObj.text.append(elementObj.topRow, elementObj.content)
+		elementObj.text.append(elementObj.topRow, elementObj.content, elementObj.menu)
 		elementObj.topRow.append(elementObj.title, elementObj.dueDate, elementObj.button_Exand)
 		elementObj.button_Exand.src = chevronImg
 		elementObj.button_Exand.addEventListener("click", () => {
 			Elements.taskCollapseToggle(elementObj)
 		})
 		elementObj.content.append(elementObj.notes)
+		elementObj.menu.append(elementObj.button_Menu)
 		elementObj.title.textContent = text
 
 		return elementObj
