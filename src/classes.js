@@ -3,7 +3,7 @@ const Elements = require("./elements.js")
 class Task {
 
 	constructor (title, project) {
-		this.id = this.createId()
+		this.id = Task.createId()
 		this.title = title
 		this.project = project
 		this._priority = {index: 0, level: Task.priorityClasses[0]}
@@ -16,6 +16,10 @@ class Task {
 		this.elements.button_Menu.addEventListener("click", ()=> {
 			if (this.priority.level == "priority-delete") {
 				this.elements.group.remove()
+				this.project.deleteTask(this)
+			} else if (this.priority.level == "priority-complete") {
+				this.elements.group.remove()
+				this.project.tasks.completed.push(this)
 				this.project.deleteTask(this)
 			}
 			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
@@ -65,7 +69,7 @@ class Task {
 	}
 	get priority () {return this._priority}
 
-	createId () {
+	static createId () {
 		Task.taskCount++
 		return Task.taskCount
 	}
@@ -94,9 +98,13 @@ class Task {
 
 class Project {
 
-	constructor (title, ...tasks) {
+	static collection = {"projects": []}
+	static projectCount = 0
+
+	constructor (title) {
+		this.id = Project.createId()
 		this.title = title
-		this.tasks = []
+		this.tasks = {active: [], completed: []}
 		this.elements = Elements.createProject(this.title)
 
 		this.elements.taskAdder.addButton.addEventListener("click", ()=> {
@@ -113,20 +121,24 @@ class Project {
 				newTask.displayTask()
 			}
 		})
+
+		this.elements.menuButton.addEventListener("click", ()=> {
+			this.deleteProject()
+		})
+
+		Project.collection.projects.push(this)
 	}
 
 	addTasks (...tasks) {
-		this.tasks.push(tasks)
-		console.log(this.tasks)
+		this.tasks.active.push(tasks)
 	}
 
 	deleteTask (task) {
-		for (let [index, t] of this.tasks.entries()) {
-			if (t.id == task.id) { 
-				this.tasks.splice(index, 1)
+		for (let [index, t] of this.tasks.active.entries()) {
+			if (t[0].id == task.id) { 
+				this.tasks.active.splice(index, 1)
 			}
 		}
-		console.log(this.tasks)
 	}
 
 	displayProject() {
@@ -138,7 +150,21 @@ class Project {
 			let targetNode = projectContainerChildren[0]
 			Elements.projectsContainer.insertBefore(this.elements.group, targetNode)
 		}
+	}
 
+	deleteProject() {
+		this.elements.group.remove()
+		for (let [index, p] of Project.collection.projects.entries()) {
+			if (p.id == this.id) { 
+				Project.collection.projects.splice(index, 1)
+			}
+		}
+		console.log(Project.collection)
+	}
+
+	static createId () {
+		Project.projectCount++
+		return Project.projectCount
 	}
 
 }

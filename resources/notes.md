@@ -1,14 +1,12 @@
 # to do list
 
 - implement local storage
-- project delete button
-- task delete button
+x project delete button
+x task delete button
 - task edit system
 - task sorting
-- task completion system
-    - could be as simple as a cycle option in the status listener that grays out the task
-        - "x" in the status circle
-- priority button listener
+- task completion system 
+x priority button listener
 
 
 

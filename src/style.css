@@ -134,11 +134,25 @@ input[type="date"] {
 }
 
 .project {
+	position: relative;
 	background-color: var(--project-bg-color);
 	border-radius: 1rem;
 	padding: 0.5rem;
 	margin: 0.5rem 0;
 }
+.project>.task-text-menu {
+	flex-direction: row;
+	align-content: center;
+}
+.project-delete-confirm {
+	background-color: var(--accent2);
+	color: var(--accent1);
+}
+.project-delete-cancel {
+	background-color: var(--accent1);
+	color: var(--accent2);
+}
+
 
 #new-project-button {
 	font-family: "Nunito", sans-serif;
@@ -252,6 +266,8 @@ input[type="date"] {
 
 .task-text-menu {
 	display:flex;
+	flex-direction: column;
+	gap: 0.5rem;
 	align-items: center;
 	justify-content: center;
 	position: absolute;
@@ -262,9 +278,9 @@ input[type="date"] {
 	overflow: hidden;
 	color: var(--task-text-color);
 	border: none;
+	border-radius: var(--task-border-radius);
 	background: #3335;
 	backdrop-filter: blur(1px);
-
 }
 .task-text-menu div {
 	font-weight: bold;

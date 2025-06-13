@@ -16,11 +16,14 @@ class Elements {
 	static createProject (_title) {
 		let elementObj = {
 			group: this.createElement("section", "project"),
+			menu: this.createElement("div", "task-text-menu", "invisible"),
+			menuButton: this.createElement("div", "project-delete-confirm"),
+			menuButtonCancel: this.createElement("div", "project-delete-cancel"),
 			header: this.createElement("div", "project-header"),
 			button_Display: this.createElement("div", "project-display-button"),
 			img_Expand: this.createElement("img", "project-expand-img"),
 			title: this.createElement("header", "project-name"),
-			img_Delete: this.createElement("img", "project-delete-img"),
+			button_Delete: this.createElement("img", "project-delete-img"),
 			content: this.createElement("div", "project-content"),
 			nav: this.createElement("nav", "project-nav"),
 			button_AddTask: this.createElement("div", "add-task", "project-header-button"),
@@ -29,16 +32,17 @@ class Elements {
 			taskAdder: Elements.createNewTaskForm()
 		}
 
-		elementObj.group.append(elementObj.header, elementObj.content)
+		elementObj.group.append(elementObj.header, elementObj.content, elementObj.menu)
+		elementObj.menu.append(elementObj.menuButton, elementObj.menuButtonCancel)
 		elementObj.header.append(elementObj.button_Display, 
-			elementObj.title, elementObj.img_Delete)
+			elementObj.title, elementObj.button_Delete)
 
 		elementObj.content.append(elementObj.nav, elementObj.taskAdder.group, elementObj.tasksContainer)
 		elementObj.nav.append(elementObj.button_AddTask, elementObj.button_SortTasks)
 
 		elementObj.img_Expand.src = collapseImg
 		elementObj.button_Display.append(elementObj.img_Expand)
-		elementObj.img_Delete.src = closeImg
+		elementObj.button_Delete.src = closeImg
 
 		elementObj.button_Display.addEventListener("click", () => {
 			Elements.projectCollapseToggle(elementObj)
@@ -47,7 +51,17 @@ class Elements {
 		elementObj.button_AddTask.addEventListener("click", ()=> {
 			Elements.toggleInvisible(elementObj.taskAdder.group)
 		})
+		
+		elementObj.button_Delete.addEventListener("click", ()=> {
+			elementObj.menu.classList.toggle("invisible")
+		})
 
+		elementObj.menuButtonCancel.addEventListener("click", ()=> {
+			elementObj.menu.classList.toggle("invisible")
+		})
+
+		elementObj.menuButton.textContent = "Delete project?"
+		elementObj.menuButtonCancel.textContent = "Cancel"
 		elementObj.title.textContent = _title
 		elementObj.button_AddTask.textContent = "add task"
 		elementObj.button_SortTasks.textContent = "sort tasks"
