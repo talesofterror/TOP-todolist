@@ -1,7 +1,5 @@
 const {Task, Project}  = require("./classes.js")
-const Elements = require("./elements.js")
 const Forms = require("./forms.js")
-// const Elements = require("./elements.js")
 require("./style.css")
 
 Forms.initializeForms()
