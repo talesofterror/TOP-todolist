@@ -1,4 +1,5 @@
 const Elements = require("./elements.js")
+const DepositBox = require("./storage.js")
 
 class Task {
 
@@ -127,6 +128,8 @@ class Project {
 		})
 
 		Project.collection.projects.push(this)
+		// DepositBox.createStoredProjects(Project.collection)
+
 	}
 
 	addTasks (...tasks) {
