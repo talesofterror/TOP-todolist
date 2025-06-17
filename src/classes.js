@@ -156,6 +156,7 @@ class Project {
 				this.tasks.active.splice(index, 1)
 			}
 		}
+		DepositBox.updateStorage(Project.collection)
 	}
 
 	displayProject() {
@@ -176,7 +177,7 @@ class Project {
 				Project.collection.projects.splice(index, 1)
 			}
 		}
-		console.log(Project.collection)
+		DepositBox.updateStorage(Project.collection)
 	}
 
 	static createId () {

@@ -18,10 +18,13 @@ badd +82 src/elements.js
 badd +12 src/classes.js
 badd +238 src/style.css
 badd +61 src/template.html
-badd +0 src/forms.js
+badd +1 src/forms.js
+badd +0 NvimTree_1
+badd +0 src/storage.js
 argglobal
 %argdel
 $argadd NvimTree_1
+tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
 tabnew +setlocal\ bufhidden=wipe
@@ -85,7 +88,28 @@ if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 15
-normal! 0108|
+normal! 045|
+lcd ~/personal-repos/TOP-todolist
+tabnext
+edit ~/personal-repos/TOP-todolist/src/storage.js
+argglobal
+balt ~/personal-repos/TOP-todolist/src/index.js
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+let &fdl = &fdl
+let s:l = 1 - ((0 * winheight(0) + 27) / 54)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 1
+normal! 0
 lcd ~/personal-repos/TOP-todolist
 tabnext
 edit ~/personal-repos/TOP-todolist/src/elements.js
@@ -120,11 +144,11 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 48 - ((44 * winheight(0) + 27) / 54)
+let s:l = 54 - ((53 * winheight(0) + 27) / 54)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 48
+keepjumps 54
 normal! 0
 lcd ~/personal-repos/TOP-todolist
 tabnext
@@ -147,7 +171,7 @@ normal! zt
 keepjumps 13
 normal! 010|
 lcd ~/personal-repos/TOP-todolist
-tabnext 5
+tabnext 4
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
