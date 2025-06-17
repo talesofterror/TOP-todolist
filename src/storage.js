@@ -12,16 +12,16 @@ class DepositBox {
 		}
 	}
 
-	static createStoredProjects (projects) {
-		let storageObject = {}
+	static updateStorage (collection) {
+		let object = collection
 		
-		Object.assign(storageObject, projects)
+		Object.assign(object, collection)
 
-		delete storageObject.projects.elements
+		let string = JSON.stringify(object)
+		console.log(collection)
 
-		let storageString = JSON.stringify(storageObject)
-
-		return storageString
+		localStorage.clear()
+		localStorage.setItem("TOPTDL", string)
 	}
 }
 

@@ -3,28 +3,32 @@ const DepositBox = require("./storage.js")
 
 class Task {
 
-	constructor (title, project) {
+	constructor (title, projectId) {
 		this.id = Task.createId()
 		this.title = title
-		this.project = project
+		this.projectId = projectId
 		this._priority = {index: 0, level: Task.priorityClasses[0]}
-		project.addTasks(this)
 		this.elements = Elements.createTask(this.title)
-		project.elements.tasksContainer.append(this.elements.group)
+
+		Task.locateProject(projectId).addTask(this)
+		
 		this.elements.status.addEventListener("click", ()=> {
 			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
 		})
 		this.elements.button_Menu.addEventListener("click", ()=> {
+			let project = Task.locateProject(this.projectId)
 			if (this.priority.level == "priority-delete") {
 				this.elements.group.remove()
-				this.project.deleteTask(this)
+				project.deleteTask(this)
 			} else if (this.priority.level == "priority-complete") {
 				this.elements.group.remove()
-				this.project.tasks.completed.push(this)
-				this.project.deleteTask(this)
+				project.tasks.completed.push(this)
+				project.deleteTask(this)
 			}
 			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
 		})
+
+		DepositBox.updateStorage(Project.collection)
 	}
 
 	static taskCount = 0
@@ -76,8 +80,9 @@ class Task {
 	}
 
 	displayTask() {
-		let tasksContainer = this.project.elements.tasksContainer
-		let tasksContainerChildren = this.project.elements.tasksContainer.children
+		let project = Task.locateProject(this.projectId)
+		let tasksContainer = project.elements.tasksContainer
+		let tasksContainerChildren = project.elements.tasksContainer.children
 
 		if (tasksContainerChildren.length == 1) {
 			tasksContainer.append(this.elements.group)
@@ -95,11 +100,19 @@ class Task {
 		}
 	}
 
+	static locateProject (id) {
+		for (let i of Project.collection.projects) {
+			if (i.id == id) {
+				return i
+			}
+		}
+	}
+
 }
 
 class Project {
 
-	static collection = {"projects": []}
+	static collection = {projects: []}
 	static projectCount = 0
 
 	constructor (title) {
@@ -112,14 +125,14 @@ class Project {
 			if (Elements.invalidFlash(this.elements.taskAdder.inputTitle, this.elements.taskAdder.inputNotes)){
 				return
 			} else {
-				let newTask = new Task(this.elements.taskAdder.inputTitle.value, this)
+				let newTask = new Task(this.elements.taskAdder.inputTitle.value, this.id)
+				this.elements.tasksContainer.append(newTask.elements.group)
 				newTask.dueDate = this.elements.taskAdder.inputDueDate.value
 				newTask.notes = this.elements.taskAdder.inputNotes.value
 				this.elements.taskAdder.inputTitle.value = ""
 				this.elements.taskAdder.inputNotes.value = ""
 				this.elements.taskAdder.inputDueDate.valueAsDate = new Date()
-
-				newTask.displayTask()
+				this.addTask(newTask)
 			}
 		})
 
@@ -128,12 +141,13 @@ class Project {
 		})
 
 		Project.collection.projects.push(this)
-		// DepositBox.createStoredProjects(Project.collection)
+		DepositBox.updateStorage(Project.collection)
 
 	}
 
-	addTasks (...tasks) {
-		this.tasks.active.push(tasks)
+	addTask (task) {
+		this.tasks.active.push(task)
+		task.displayTask(this.id)
 	}
 
 	deleteTask (task) {
