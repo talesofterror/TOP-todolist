@@ -1,5 +1,6 @@
 const { Project } = require("./classes.js")
 const Elements = require("./elements.js")
+const DepositBox = require("./storage.js")
 
 class Forms {
 
@@ -25,6 +26,8 @@ class Forms {
 			Elements.inputProjectName.style.height = '0px';
 		  Elements.inputProjectName.style.height = Elements.inputProjectName.scrollHeight + 'px';	
 		})
+
+		DepositBox.initializeStoredProjects()
 	}
 	
 	static toggleNewProjectForm (state) {

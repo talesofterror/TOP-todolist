@@ -152,7 +152,7 @@ class Project {
 
 	deleteTask (task) {
 		for (let [index, t] of this.tasks.active.entries()) {
-			if (t[0].id == task.id) { 
+			if (t.id == task.id) { 
 				this.tasks.active.splice(index, 1)
 			}
 		}
