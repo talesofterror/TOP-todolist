@@ -3,8 +3,8 @@ const DepositBox = require("./storage.js")
 
 class Task {
 
-	constructor (title, projectId) {
-		this.id = Task.createId()
+	constructor (title, projectId, taskId) {
+		this.id = taskId ? taskId : Task.createId()
 		this.title = title
 		this.projectId = projectId
 		this._priority = {index: 0, level: Task.priorityClasses[0]}
@@ -28,7 +28,6 @@ class Task {
 			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
 		})
 
-		DepositBox.updateStorage(Project.collection)
 	}
 
 	static taskCount = 0
@@ -38,6 +37,7 @@ class Task {
 	set dueDate (date) {
 		this._dueDate = date
 		this.elements.dueDate.textContent = date
+		DepositBox.setStoredTasks(this)
 	}
 	get dueDate () {return this._dueDate}
 
@@ -45,6 +45,7 @@ class Task {
 	set notes(text) {
 		this._notes = text
 		this.elements.notes.textContent = this._notes
+		DepositBox.setStoredTasks(this)
 	}
 	get notes() {return this._notes}
 
@@ -71,6 +72,7 @@ class Task {
 			this.elements.menu.classList.toggle("invisible")
 			this.elements.button_Menu.classList.toggle("task-text-menu-complete")
 		}
+		DepositBox.setStoredTasks(this)
 	}
 	get priority () {return this._priority}
 
@@ -115,10 +117,10 @@ class Project {
 	static collection = {projects: []}
 	static projectCount = 0
 
-	constructor (title) {
-		this.id = Project.createId()
+	constructor (title, id) {
+		this.id = id == null ? Project.createId() : id
 		this.title = title
-		this.tasks = {active: [], completed: []}
+		this.tasks = []
 		this.elements = Elements.createProject(this.title)
 
 		this.elements.taskAdder.addButton.addEventListener("click", ()=> {
@@ -140,23 +142,28 @@ class Project {
 			this.deleteProject()
 		})
 
+		this.displayProject()
+
 		Project.collection.projects.push(this)
-		DepositBox.updateStorage(Project.collection)
+		DepositBox.setStoredProject(this)
+
+		console.log(Project.collection.projects)
 
 	}
 
 	addTask (task) {
-		this.tasks.active.push(task)
+		this.tasks.push(task)
 		task.displayTask(this.id)
+		DepositBox.setStoredTasks(task)
 	}
 
 	deleteTask (task) {
-		for (let [index, t] of this.tasks.active.entries()) {
+		for (let [index, t] of this.tasks.entries()) {
 			if (t.id == task.id) { 
-				this.tasks.active.splice(index, 1)
+				this.tasks.splice(index, 1)
 			}
 		}
-		DepositBox.updateStorage(Project.collection)
+		DepositBox.removeStoredTask(task)
 	}
 
 	displayProject() {
@@ -177,7 +184,7 @@ class Project {
 				Project.collection.projects.splice(index, 1)
 			}
 		}
-		DepositBox.updateStorage(Project.collection)
+		DepositBox.removeStoredProject(this)
 	}
 
 	static createId () {
