@@ -3,17 +3,51 @@ const Elements = require("./elements.js")
 
 class DepositBox {
 
+	static hydratedData
+
 	static initializeStoredProjects () { 
-		if (localStorage.getItem("TOPTDL-Projects")) {
-			const storedProjectsString = localStorage.getItem("TOPTDL-Projects")
-			const storedProjectsObject = JSON.toJSON(storedProjectsString);
-			const elements = Elements.createProject(storedProjectsObject.title)
-			Object.assign(storedProjectsObject, elements)
-			return storedProjectsObject
+		if (localStorage.getItem("TOPTDL")) {
+			this.hydratedData = this.rehydrate(localStorage.getItem("TOPTDL"))
+			console.log(this.hydratedData)
 		}
+
+		// need make the project and task data into actual Project and Task objects
+		// can probably accomplish this in the forms class
 	}
 
-	static reduceObject(projects) {
+	static rehydrate (storedString) {
+		let parsedProjects = JSON.parse(storedString)
+		// console.log(parsedProjects)
+
+		let hydrateProject = (project) => {
+			project.elements = Elements.createProject(project.title)
+		}
+
+		let hydrateTask = (task) => {
+			let elements = Elements.createTask(task.title)
+			task.elements = elements
+		}
+
+		for (let project of parsedProjects) {
+			hydrateProject(project)
+		}
+
+		for (let project of parsedProjects) {
+			for (let activeItem of project.tasks.active) {
+				hydrateTask(activeItem)
+			}
+			for (let completedItem of project.tasks.completed) {
+				hydrateTask(completedItem)
+			}
+		}
+
+		// console.log(parsedProjects)
+
+		return parsedProjects
+
+	}
+
+	static dehydrate(projects) {
 		const reducedProjects = []
 
 		let projectObject = (input) => ({
@@ -48,16 +82,14 @@ class DepositBox {
 	}
 
 	static updateStorage (collection) {
-		let object = collection
-		
-		Object.assign(object, collection)
+		let object = this.dehydrate(collection.projects)		
 
 		let string = JSON.stringify(object)
 
 		localStorage.clear()
 		localStorage.setItem("TOPTDL", string)
-		console.log("reducing projects: ")
-		console.log(this.reduceObject(object.projects))
+		// console.log("reducing projects: ")
+		// console.log(this.dehydrate(object.projects))
 	}
 }
 
