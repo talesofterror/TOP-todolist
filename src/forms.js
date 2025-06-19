@@ -10,9 +10,6 @@ class Forms {
 			let projects = DepositBox.getStoredProjects()
 			let tasks = DepositBox.getStoredTasks()
 
-			console.log(projects)
-			console.log(tasks)
-
 			for (let project of projects) {
 				if (project.id > Project.projectCount) { Project.projectCount = project.id }
 				let hydratedProject = new Project(project.title, project.id)
@@ -26,10 +23,6 @@ class Forms {
 				hydratedTask.notes = task.notes
 				hydratedTask.priority = task.priority.index
 			}
-
-			console.log("Project Count: " + Project.projectCount)
-			console.log("Task Count: " + Task.taskCount)
-			
 		} else {
 			const project1 = new Project("Default Project 1")
 			const task1 = new Task("task1 - project 1", project1.id)
@@ -40,7 +33,6 @@ class Forms {
 			const project2 = new Project("Default Project 2")
 			const task3 = new Task("task3 - project 2", project2.id)
 			task3.notes = "This is another task. Hi."
-
 		}
 
 		Elements.newProjectFormContainer.onsubmit = Forms.addProject
@@ -62,8 +54,6 @@ class Forms {
 			Elements.inputProjectName.style.height = '0px';
 		  Elements.inputProjectName.style.height = Elements.inputProjectName.scrollHeight + 'px';	
 		})
-
-
 	}
 	
 	static toggleNewProjectForm (state) {
@@ -92,7 +82,6 @@ class Forms {
 		DepositBox.setStoredProject(newProject)
 		return false
 	}
-	
 }
 
 module.exports = Forms
