@@ -53,10 +53,12 @@ class Task {
 	set priority (index) {
 		let last = this.priority.level
 
+		let newPriority = {index: index, level: Task.priorityClasses[index]}
+
 		this._priority.index = index
 		this._priority.level = Task.priorityClasses[index]
 
-		this.elements.status.classList.replace(last, this.priority.level)
+		this.elements.status.classList.replace(last, Task.priorityClasses[index])
 
 		if (this.priority.level == "priority-delete") {
 			this.elements.menu.classList.remove("invisible")
@@ -76,6 +78,7 @@ class Task {
 			this.elements.button_Menu.classList.remove("task-text-menu-delete")
 		}
 		DepositBox.setStoredTasks(this)
+		return newPriority
 	}
 	get priority () {return this._priority}
 	
@@ -112,7 +115,6 @@ class Task {
 			}
 		}
 	}
-
 }
 
 class Project {
@@ -141,21 +143,28 @@ class Project {
 			}
 		})
 
+		this.elements.button_SortTasks.addEventListener("click", ()=> {
+			this.sortTasks()
+		})
+
 		this.elements.menuButton.addEventListener("click", ()=> {
 			this.deleteProject()
 		})
 
 		this.displayProject()
 
+		this.invertSort = false
+
 		Project.collection.projects.push(this)
 		DepositBox.setStoredProject(this)
-
-		console.log(Project.collection.projects)
 	}
+
+
 
 	addTask (task) {
 		this.tasks.push(task)
 		task.displayTask(this.id)
+		this.elements.taskAdder.group.classList.add("invisible")
 		DepositBox.setStoredTasks(task)
 	}
 
@@ -189,11 +198,31 @@ class Project {
 		DepositBox.removeStoredProject(this)
 	}
 
+	sortTasks () {
+		let sortedArray = this.tasks.sort( function(a, b) {
+			if (a.priority.index > b.priority.index) {
+				return 1
+			}
+			if (a.priority.index < b.priority.index) {
+				return -1
+			}
+			return 0
+		})
+		
+		if (!this.invertSort) { sortedArray.reverse() }
+		
+		for (let task of sortedArray) {
+			this.elements.tasksContainer.htmlContent = ""
+			this.elements.tasksContainer.append(task.elements.group)
+		}
+
+		this.invertSort = !this.invertSort
+	}
+
 	static createId () {
 		Project.projectCount++
 		return Project.projectCount
 	}
-
 }
 
 module.exports = {Task, Project}

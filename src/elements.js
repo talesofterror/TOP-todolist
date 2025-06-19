@@ -104,6 +104,10 @@ class Elements {
 		  inputNotes.style.height = inputTitle.scrollHeight + "px";
 		})
 
+		cancelButton.addEventListener("click", ()=> {
+			Elements.toggleInvisible(group)
+		})
+
 		return {group, inputTitle, inputDueDate, inputNotes, addButton}
 	}
 

@@ -1,12 +1,13 @@
 # to do list
 
-- implement local storage
+x implement local storage
 x project delete button
 x task delete button
 - task edit system
-- task sorting
-- task completion system 
+x task sorting
+x task completion system
 x priority button listener
+- desktop site
 
 
 

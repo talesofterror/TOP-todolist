@@ -12,8 +12,8 @@ class DepositBox {
 		let storageString = JSON.stringify(storageObject)
 		let storageName = "project-" + storageObject.id
 		localStorage.setItem("project-" + storageObject.id, storageString)
-		console.log(storageName + " stored as ")
-		console.log(localStorage.getItem(storageName))
+		// console.log(storageName + " stored as ")
+		// console.log(localStorage.getItem(storageName))
 	}
 
 	static setStoredTasks (task) {
@@ -30,8 +30,8 @@ class DepositBox {
 		let storageString = JSON.stringify(storageObject)
 		let storageName = "task-" + storageObject.id
 		localStorage.setItem(storageName, storageString)
-		console.log(storageName + " stored as ")
-		console.log(localStorage.getItem(storageName))
+		// console.log(storageName + " stored as ")
+		// console.log(localStorage.getItem(storageName))
 	}
 
 	static removeStoredProject (project) {
@@ -76,7 +76,6 @@ class DepositBox {
 		}
 		return tasks
 	}
-
 }
 
 module.exports = DepositBox
