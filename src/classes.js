@@ -3,6 +3,9 @@ const DepositBox = require("./storage.js")
 
 class Task {
 
+	static taskCount = 0
+	static priorityClasses = ["priority-1", "priority-2", "priority-3", "priority-delete", "priority-complete"]
+
 	constructor (title, projectId, taskId) {
 		this.id = taskId ? taskId : Task.createId()
 		this.title = title
@@ -15,6 +18,7 @@ class Task {
 		this.elements.status.addEventListener("click", ()=> {
 			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
 		})
+
 		this.elements.button_Menu.addEventListener("click", ()=> {
 			let project = Task.locateProject(this.projectId)
 			if (this.priority.level == "priority-delete") {
@@ -27,11 +31,7 @@ class Task {
 			}
 			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
 		})
-
 	}
-
-	static taskCount = 0
-	static priorityClasses = ["priority-1", "priority-2", "priority-3", "priority-delete", "priority-complete"]
 
 	_dueDate
 	set dueDate (date) {
@@ -59,23 +59,26 @@ class Task {
 		this.elements.status.classList.replace(last, this.priority.level)
 
 		if (this.priority.level == "priority-delete") {
-			this.elements.menu.classList.toggle("invisible")
+			this.elements.menu.classList.remove("invisible")
 			this.elements.button_Menu.textContent = "Delete?"
-			this.elements.button_Menu.classList.toggle("task-text-menu-delete")
+			this.elements.button_Menu.classList.add("task-text-menu-delete")
+			this.elements.button_Menu.classList.remove("task-text-menu-complete")
 		}
-		if (this.priority.level == "priority-complete") {
+		else if (this.priority.level == "priority-complete") {
+			this.elements.menu.classList.remove("invisible")
 			this.elements.button_Menu.textContent = "Mark complete?"
-			this.elements.button_Menu.classList.toggle("task-text-menu-delete")
-			this.elements.button_Menu.classList.toggle("task-text-menu-complete")
+			this.elements.button_Menu.classList.remove("task-text-menu-delete")
+			this.elements.button_Menu.classList.add("task-text-menu-complete")
 		}
-		if (this.priority.level == "priority-1") {
-			this.elements.menu.classList.toggle("invisible")
-			this.elements.button_Menu.classList.toggle("task-text-menu-complete")
+		else {
+			this.elements.menu.classList.add("invisible")
+			this.elements.button_Menu.classList.remove("task-text-menu-complete")
+			this.elements.button_Menu.classList.remove("task-text-menu-delete")
 		}
 		DepositBox.setStoredTasks(this)
 	}
 	get priority () {return this._priority}
-
+	
 	static createId () {
 		Task.taskCount++
 		return Task.taskCount
@@ -148,7 +151,6 @@ class Project {
 		DepositBox.setStoredProject(this)
 
 		console.log(Project.collection.projects)
-
 	}
 
 	addTask (task) {
