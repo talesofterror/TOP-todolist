@@ -202,7 +202,6 @@ class Elements {
 			element.classList.add("flip")
 		}
 	}
-
 }
 
 

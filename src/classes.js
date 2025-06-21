@@ -7,7 +7,7 @@ class Task {
 	static priorityClasses = ["priority-1", "priority-2", "priority-3", "priority-delete", "priority-complete"]
 
 	constructor (title, projectId, taskId) {
-		this.id = taskId ? taskId : Task.createId()
+		this.id = taskId == null ? Task.createId() : taskId
 		this.title = title
 		this.projectId = projectId
 		this._priority = {index: 0, level: Task.priorityClasses[0]}
@@ -26,7 +26,7 @@ class Task {
 				project.deleteTask(this)
 			} else if (this.priority.level == "priority-complete") {
 				this.elements.group.remove()
-				project.tasks.completed.push(this)
+				// project.tasks.push(this)
 				project.deleteTask(this)
 			}
 			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
