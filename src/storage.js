@@ -1,5 +1,3 @@
-// let Project = require("./classes.js")
-const Elements = require("./elements.js")
 
 class DepositBox {
 
@@ -10,10 +8,7 @@ class DepositBox {
 		}
 
 		let storageString = JSON.stringify(storageObject)
-		let storageName = "project-" + storageObject.id
 		localStorage.setItem("project-" + storageObject.id, storageString)
-		// console.log(storageName + " stored as ")
-		// console.log(localStorage.getItem(storageName))
 	}
 
 	static setStoredTasks (task) {
@@ -31,31 +26,17 @@ class DepositBox {
 		let storageString = JSON.stringify(storageObject)
 		let storageName = "task-" + storageObject.id
 		localStorage.setItem(storageName, storageString)
-		// console.log(storageName + " stored as ")
-		// console.log(localStorage.getItem(storageName))
 	}
 
 	static removeStoredProject (project) {
-		for (let key in localStorage) {
-			if (key.split("-").includes("project")) {
-				if (key.split("-").includes(project.id.toString())) {
-					localStorage.removeItem(key)
-					for (let task of project.tasks) {
-						this.removeStoredTask(task)
-					}
-				}
-			}
+		localStorage.removeItem(`project-${project.id}`)
+		for (let task of project.tasks) {
+			this.removeStoredTask(task)
 		}
 	}
 
 	static removeStoredTask (task) {
-		for (let key in localStorage) {
-			if (key.split("-").includes("task")) {
-				if (key.split("-").includes(task.id.toString())) {
-					localStorage.removeItem(key)
-				}
-			}
-		}
+		localStorage.removeItem(`task-${task.id}`)
 	}
 
 	static getStoredProjects () {
