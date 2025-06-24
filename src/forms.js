@@ -7,7 +7,7 @@ class Forms {
 	static initializeForms () {
 
 		if (localStorage.length != 0) {
-			let projects = DepositBox.getStoredProjects()
+			let projects = DepositBox.getStoredProjects().reverse()
 			let tasks = DepositBox.getStoredTasks()
 
 			for (let project of projects) {

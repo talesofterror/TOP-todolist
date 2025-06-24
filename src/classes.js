@@ -76,8 +76,9 @@ class Task {
 			this.elements.menu.classList.add("invisible")
 			this.elements.button_Menu.classList.remove("task-text-menu-complete")
 			this.elements.button_Menu.classList.remove("task-text-menu-delete")
+			DepositBox.setStoredTasks(this)
 		}
-		DepositBox.setStoredTasks(this)
+
 		return newPriority
 	}
 	get priority () {return this._priority}
