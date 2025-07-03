@@ -1,5 +1,6 @@
 const Elements = require("./elements.js")
 const DepositBox = require("./storage.js")
+const {lightFormat, isAfter} = require("date-fns")
 
 class Task {
 
@@ -36,7 +37,13 @@ class Task {
 	_dueDate
 	set dueDate (date) {
 		this._dueDate = date
-		this.elements.dueDate.textContent = date
+		this.elements.dueDate.textContent = "Due: " + this.formatDate(date)
+		if (isAfter(new Date(), new Date(date))) {
+			console.log("task overdue")
+			this.elements.dueDate.classList.add("task-due-date-overdue")
+			this.elements.status.textContent = "!"
+		}
+
 		DepositBox.setStoredTasks(this)
 	}
 	get dueDate () {return this._dueDate}
@@ -116,6 +123,15 @@ class Task {
 			}
 		}
 	}
+
+	formatDate (date) {
+		console.log(date.split("-"))
+
+		const split = date.split("-")
+		
+		return lightFormat(new Date(Number(split[0]), Number(split[1]) - 1, Number(split[2])), "MM/dd/yyyy")
+
+	}
 }
 
 class Project {
@@ -140,6 +156,7 @@ class Project {
 				this.elements.taskAdder.inputTitle.value = ""
 				this.elements.taskAdder.inputNotes.value = ""
 				this.elements.taskAdder.inputDueDate.valueAsDate = new Date()
+
 				this.addTask(newTask)
 			}
 		})
@@ -159,8 +176,6 @@ class Project {
 		Project.collection.projects.push(this)
 		DepositBox.setStoredProject(this)
 	}
-
-
 
 	addTask (task) {
 		this.tasks.push(task)
