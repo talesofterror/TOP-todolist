@@ -281,6 +281,10 @@ input[type="date"] {
 	cursor: pointer;
 }
 
+.task-status-icon-overdue {
+	animation: 1s infinite reverse overdue-flash;
+}
+
 .task-text {
 	position: relative;
 	flex-grow: 1;
@@ -345,6 +349,17 @@ input[type="date"] {
 
 .task-due-date-overdue {
 	color: var(--accent2);
+
+
+}
+
+@keyframes overdue-flash {
+	0% {
+		color: var(--priority-3-color);
+	}
+	100% {
+		color: var(--base2);
+	}
 }
 
 .task-menu {

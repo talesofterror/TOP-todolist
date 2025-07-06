@@ -17,7 +17,7 @@ class DepositBox {
 			id: task.id,
 			projectId: task.projectId,
 			text: task.text,
-			taskComplete: task.taskCompleted,
+			complete: task.completed,
 			notes: task.notes,
 			dueDate: task._dueDate,
 			priority: {index: task.priority.index, level: task.priority.level}

@@ -13,6 +13,7 @@ class Task {
 		this.projectId = projectId
 		this._priority = {index: 0, level: Task.priorityClasses[0]}
 		this.elements = Elements.createTask(this.title)
+		this.completed = false;
 
 		Task.locateProject(projectId).addTask(this)
 		
@@ -23,14 +24,10 @@ class Task {
 		this.elements.button_Menu.addEventListener("click", ()=> {
 			let project = Task.locateProject(this.projectId)
 			if (this.priority.level == "priority-delete") {
-				this.elements.group.remove()
-				project.deleteTask(this)
+				this.deleteTask(project)
 			} else if (this.priority.level == "priority-complete") {
-				this.elements.group.remove()
-				// project.tasks.push(this)
-				project.deleteTask(this)
+				this.completeTask(project)
 			}
-			this.priority = Task.returnNextIndex(Task.priorityClasses, this.priority.index)
 		})
 	}
 
@@ -39,9 +36,14 @@ class Task {
 		this._dueDate = date
 		this.elements.dueDate.textContent = "Due: " + this.formatDate(date)
 		if (isAfter(new Date(), new Date(date))) {
-			console.log("task overdue")
 			this.elements.dueDate.classList.add("task-due-date-overdue")
 			this.elements.status.textContent = "!"
+			this.elements.status.classList.add("task-status-icon-overdue")
+		}
+		else {
+			this.elements.dueDate.classList.remove("task-due-date-overdue")
+			this.elements.status.textContent = ""
+			this.elements.status.classList.remove("task-status-icon-overdue")
 		}
 
 		DepositBox.setStoredTasks(this)
@@ -125,12 +127,20 @@ class Task {
 	}
 
 	formatDate (date) {
-		console.log(date.split("-"))
-
 		const split = date.split("-")
-		
 		return lightFormat(new Date(Number(split[0]), Number(split[1]) - 1, Number(split[2])), "MM/dd/yyyy")
+	}
 
+	deleteTask (project) {
+		this.elements.group.remove()
+		DepositBox.removeStoredTask(this)
+		project.deleteTask(this)
+	}
+
+	completeTask (project) {
+		this.elements.group.remove()
+		DepositBox.removeStoredTask(this)
+		project.deleteTask(this)
 	}
 }
 
@@ -190,7 +200,6 @@ class Project {
 				this.tasks.splice(index, 1)
 			}
 		}
-		DepositBox.removeStoredTask(task)
 	}
 
 	displayProject() {
