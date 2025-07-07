@@ -24,15 +24,10 @@ class Forms {
 				hydratedTask.priority = task.priority.index
 			}
 		} else {
-			const project1 = new Project("Default Project 1")
-			const task1 = new Task("task1 - project 1", project1.id)
-			task1.dueDate = new Date().toUTCString()
-			task1.notes = "This is the task description. What am I describing? Nothing in particular. What do you care?"
-			const task2 = new Task("task2 - project 1", project1.id)
-
-			const project2 = new Project("Default Project 2")
-			const task3 = new Task("task3 - project 2", project2.id)
-			task3.notes = "This is another task. Hi."
+			let defaultProject = new Project("The Default Project")
+			let defaultTask = new Task("Do whatever", defaultProject.id)
+			defaultTask.notes = "Whatever you want. Go for it."
+			defaultTask.dueDate = Date()
 		}
 
 		Elements.newProjectFormContainer.onsubmit = Forms.addProject

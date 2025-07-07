@@ -203,29 +203,41 @@ class Elements {
 		}
 	}
 
-
-		dialogElement = document.getElementById("dialog")
+	static dialogElement = document.getElementById("dialog")
+	static extrasInfo = document.querySelector("#extras>.extras-item:first-child")
+	static extrasClear = document.querySelector("#extras>.extras-item:last-child")
+	static dialogMain = this.createElement("div", "dialog-body")
+	static dialogHeader = this.createElement("h2", "dialogue-header")
+	static dialogText = this.createElement("div", "dialog-text")
+	static dialogAccept = this.createElement("div", "dialog-accept")
+	static dialogDecline = this.createElement("div", "dialog-decline")
 
 	static hydrateExtras () {
-	 let info = document.querySelector("#extras>.extras-item:first-child")
-	 let clear = document.querySelector("#extras>.extras-item:last-child")
 
-		info.addEventListener("click", ()=> {
-			this.openDialog("info")
+		this.dialogElement.closedBy = "any"
+
+		this.extrasClear.addEventListener("click", ()=> {
+			this.dialogElement.showModal()
+			this.modalElements("clear")
 		})
-		clear.addEventListener("click", ()=> {
-			this.openDialog("clear")
+		this.dialogAccept.addEventListener("click", ()=> {
+			localStorage.clear()
+			location.reload()
 		})
+		this.dialogDecline.addEventListener("click", ()=> {
+			this.dialogElement.close()
+		})
+		
+		this.dialogMain.append(this.dialogDecline, this.dialogHeader, this.dialogText, this.dialogAccept)
+		this.dialogDecline.textContent = "X";
+		this.dialogElement.append(this.dialogMain)
 	}
 
-	static openDialog (item) {
-		let dialogElement = document.getElementById("dialog")
-		dialogElement.closedBy = "any"
-		if (item == "info") {
-			dialogElement.showModal()
-		}
-		if (item == "clear") {
-			dialogElement.showModal()
+	static modalElements (item) {
+		if (item = "clear") {
+			this.dialogHeader.textContent = "Clear all projects?"
+			this.dialogText.innerHTML= `<p>Do you want to clear all projects and tasks? This can't be undone!</p>`
+			this.dialogAccept.textContent = "Yea, get rid of 'em!"
 		}
 	}
 }
