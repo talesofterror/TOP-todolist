@@ -35,7 +35,7 @@ class Task {
 	set dueDate (date) {
 		this._dueDate = date
 		this.elements.dueDate.textContent = "Due: " + this.formatDate(date)
-		if (isAfter(new Date(), new Date(date))) {
+		if (isAfter(Date(), Date(date))) {
 			this.elements.dueDate.classList.add("task-due-date-overdue")
 			this.elements.status.textContent = "!"
 			this.elements.status.classList.add("task-status-icon-overdue")
@@ -128,7 +128,7 @@ class Task {
 
 	formatDate (date) {
 		const split = date.split("-")
-		return format(new Date(Number(split[0]), Number(split[1]) - 1, Number(split[2])), "MMMM dd, yyyy")
+		return format(Date(Number(split[0]), Number(split[1]) - 1, Number(split[2])), "MMMM dd, yyyy")
 	}
 
 	deleteTask (project) {
