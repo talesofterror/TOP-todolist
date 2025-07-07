@@ -54,6 +54,8 @@ class Forms {
 			Elements.inputProjectName.style.height = '0px';
 		  Elements.inputProjectName.style.height = Elements.inputProjectName.scrollHeight + 'px';	
 		})
+
+		Elements.hydrateExtras()
 	}
 	
 	static toggleNewProjectForm (state) {
