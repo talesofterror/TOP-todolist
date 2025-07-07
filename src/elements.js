@@ -202,6 +202,32 @@ class Elements {
 			element.classList.add("flip")
 		}
 	}
+
+
+		dialogElement = document.getElementById("dialog")
+
+	static hydrateExtras () {
+	 let info = document.querySelector("#extras>.extras-item:first-child")
+	 let clear = document.querySelector("#extras>.extras-item:last-child")
+
+		info.addEventListener("click", ()=> {
+			this.openDialog("info")
+		})
+		clear.addEventListener("click", ()=> {
+			this.openDialog("clear")
+		})
+	}
+
+	static openDialog (item) {
+		let dialogElement = document.getElementById("dialog")
+		dialogElement.closedBy = "any"
+		if (item == "info") {
+			dialogElement.showModal()
+		}
+		if (item == "clear") {
+			dialogElement.showModal()
+		}
+	}
 }
 
 

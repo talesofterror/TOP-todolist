@@ -1,6 +1,6 @@
 const Elements = require("./elements.js")
 const DepositBox = require("./storage.js")
-const {lightFormat, isAfter} = require("date-fns")
+const {format, isAfter} = require("date-fns")
 
 class Task {
 
@@ -128,7 +128,7 @@ class Task {
 
 	formatDate (date) {
 		const split = date.split("-")
-		return lightFormat(new Date(Number(split[0]), Number(split[1]) - 1, Number(split[2])), "MM/dd/yyyy")
+		return format(new Date(Number(split[0]), Number(split[1]) - 1, Number(split[2])), "MMMM dd, yyyy")
 	}
 
 	deleteTask (project) {
