@@ -5,6 +5,7 @@ let chevronImg = require("./assets/chevron-down.svg")
 
 class Elements {
 
+	static baseContainer = document.querySelector("div.base-container")
 	static projectsContainer = document.getElementById("projects-container")
 	static newProjectButton = document.getElementById("new-project-button")
 	static newProjectForm = document.getElementById("new-project-form-container")
