@@ -52,13 +52,17 @@ class Forms {
 
 		Elements.hydrateExtras()
 	}
+
+
 	
 	static toggleNewProjectForm (state) {
 		if (state == false) {
 			Elements.newProjectButton.classList.remove("invisible")
+			Elements.baseContainer.style.gridTemplateRows = "4rem 4rem 5fr"
 			Elements.newProjectForm.classList.add("invisible")
 		} else {
 			Elements.newProjectButton.classList.add("invisible")
+			Elements.baseContainer.style.gridTemplateRows = "4rem 8rem 5fr"
 			Elements.newProjectForm.classList.remove("invisible")
 		}
 	}
