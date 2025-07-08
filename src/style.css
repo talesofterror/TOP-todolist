@@ -212,6 +212,7 @@ dialog:focus{
 	border: var(--task-border-color) var(--task-border-size) solid;
 	border-radius: var(--task-border-radius);
 	padding: 0.5rem;
+	cursor: pointer;
 }
 #dialog .dialog-decline {
 	position: absolute;
@@ -227,6 +228,7 @@ dialog:focus{
 	color: var(--accent1);
 	border: var(--task-border-size) var(--task-border-color) solid;
 	border-radius: 100rem;
+	cursor: pointer;
 }
 
 .header-nav {
@@ -551,6 +553,9 @@ dialog:focus{
 	}
 	#extras {
 		grid-area: 3 / 1 / 4 / 2;
+	}
+	#dialog .dialog-body {
+		width: 20rem;
 	}
 	.projects-container {
 		grid-area: 1 / 2 / 4 / 3;
