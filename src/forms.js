@@ -27,7 +27,7 @@ class Forms {
 			let defaultProject = new Project("The Default Project")
 			let defaultTask = new Task("Do whatever", defaultProject.id)
 			defaultTask.notes = "Whatever you want. Go for it."
-			defaultTask.dueDate = Date()
+			defaultTask.dueDate = new Date().toISOString().replace(/T.*/,"")
 		}
 
 		Elements.newProjectFormContainer.onsubmit = Forms.addProject
